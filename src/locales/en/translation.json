@@ -1,0 +1,63 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "admissions": "Admissions",
+        "gallery": "Gallery",
+        "blog": "Blog",
+        "notices": "Notices",
+        "contact": "Contact",
+        "applyNow": "Apply Now"
+    },
+    "home": {
+        "hero": {
+            "subtitle": "Welcome to Subhakamana School",
+            "title": "Empowering Future Leaders",
+            "description": "Providing quality education with a focus on holistic development, innovation, and character building.",
+            "applyNow": "Apply Now",
+            "learnMore": "Learn More",
+            "location": "Kathmandu, Nepal",
+            "founded": "Est. 2010",
+            "students": "1500+ Students"
+        },
+        "chooseUs": {
+            "badge": "Why Choose Us",
+            "title": "Nurturing Future Leaders",
+            "desc": "We provide a supportive environment where students thrive academically, socially, and emotionally."
+        },
+        "about": {
+            "badge": "About Our School",
+            "title": "A Legacy of Educational Excellence",
+            "text": "Subhakamana School has been a beacon of quality education since 2010. Our commitment to nurturing young minds has helped thousands of students achieve their dreams.",
+            "cta": "Read Our Story"
+        },
+        "programs": {
+            "badge": "Our Programs",
+            "title": "Academic Programs",
+            "desc": "Comprehensive education from primary to higher secondary level."
+        },
+        "testimonials": {
+            "badge": "Testimonials",
+            "title": "What Parents & Alumni Say",
+            "desc": "Hear from our community about their experiences."
+        },
+        "news": {
+            "recentBlogs": "Recent Blogs",
+            "recentNotices": "Recent Notices",
+            "viewAll": "View All",
+            "noNews": "No news available",
+            "noNotices": "No notices available"
+        },
+        "gallery": {
+            "badge": "Gallery",
+            "title": "Campus Life",
+            "desc": "Glimpses of activities and events at our school.",
+            "viewFull": "View Full Gallery"
+        },
+        "cta": {
+            "title": "Ready to Join Our Community?",
+            "desc": "Admissions are open for the upcoming academic session. Secure your child's future today.",
+            "contactUs": "Contact Us"
+        }
+    }
+}

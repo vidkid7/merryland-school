@@ -1,0 +1,61 @@
+.language-dropdown-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    padding: 0 10px;
+    height: 32px;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.language-dropdown-container:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.language-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    color: var(--primary-100);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 18px 0 8px;
+    /* space for globe and arrow */
+    cursor: pointer;
+    font-family: var(--font-sans);
+    outline: none;
+
+    /* Ensure the text is visible on various backgrounds */
+}
+
+/* Fix for dark option text on some browsers */
+.language-select option {
+    background-color: var(--white);
+    color: var(--neutral-800);
+    padding: 8px;
+}
+
+.lang-icon {
+    font-size: 1rem;
+    color: var(--primary-200);
+    pointer-events: none;
+}
+
+.arrow-icon {
+    font-size: 0.8rem;
+    color: var(--primary-200);
+    position: absolute;
+    right: 8px;
+    pointer-events: none;
+}
+
+/* Adjustments for Scrolled Header */
+.header.scrolled .language-select {
+    color: var(--neutral-200);
+    /* Darker text for scrolled header usually, but your scrolled header is dark blue, so keep light */
+}

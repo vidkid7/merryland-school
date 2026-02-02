@@ -16,7 +16,7 @@ import './Admissions.css';
 const stepIcons = [FiFileText, FiClipboard, FiUsers, FiCheckCircle];
 
 export default function Admissions() {
-    const { data } = useData();
+    const { data, setIsAdmissionFormOpen } = useData();
     const { admissions } = data;
 
     return (
@@ -57,6 +57,12 @@ export default function Admissions() {
                             );
                         })}
                     </div>
+
+                    <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
+                        <button onClick={() => setIsAdmissionFormOpen(true)} className="btn btn-primary btn-lg">
+                            Apply Online Now <FiArrowRight />
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -74,6 +80,11 @@ export default function Admissions() {
                                     </li>
                                 ))}
                             </ul>
+                            <div style={{ marginTop: 'var(--space-8)' }}>
+                                <button onClick={() => setIsAdmissionFormOpen(true)} className="btn btn-primary">
+                                    Start Application
+                                </button>
+                            </div>
                         </AnimatedSection>
 
                         <AnimatedSection animation="fadeInRight" className="fees-card">
@@ -94,30 +105,35 @@ export default function Admissions() {
                                 </div>
                             </div>
                             <p className="fee-note">* Fees are subject to change. Contact us for current rates.</p>
+                            <div style={{ marginTop: 'var(--space-6)' }}>
+                                <Link to="/contact" className="btn btn-outline">Enquire about fees</Link>
+                            </div>
                         </AnimatedSection>
                     </div>
                 </div>
             </section>
 
-            {/* Contact CTA */}
+            {/* CTA Section */}
             <section className="admissions-cta">
                 <div className="container">
                     <AnimatedSection className="cta-card">
                         <div className="cta-text">
-                            <h3>Ready to Apply?</h3>
-                            <p>Have questions about admissions? Our team is here to help!</p>
+                            <h3>Ready to join Merryland?</h3>
+                            <p>Apply today and give your child the best education journey.</p>
                         </div>
-                        <div className="cta-contact">
-                            <a href={`tel:${admissions.contact.phone}`} className="contact-item">
-                                <FiPhone /> {admissions.contact.phone}
-                            </a>
-                            <a href={`mailto:${admissions.contact.email}`} className="contact-item">
-                                <FiMail /> {admissions.contact.email}
-                            </a>
+                        <div className="cta-actions" style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', alignItems: 'center' }}>
+                            <button onClick={() => setIsAdmissionFormOpen(true)} className="btn btn-accent btn-lg">
+                                Open Application Form
+                            </button>
+                            <div className="cta-contact">
+                                <a href={`tel:${data.settings.phone}`} className="contact-item">
+                                    <FiPhone /> Call Us
+                                </a>
+                                <a href={`mailto:${data.settings.email}`} className="contact-item">
+                                    <FiMail /> Email Us
+                                </a>
+                            </div>
                         </div>
-                        <Link to="/contact" className="btn btn-accent btn-lg">
-                            Contact Us <FiArrowRight />
-                        </Link>
                     </AnimatedSection>
                 </div>
             </section>

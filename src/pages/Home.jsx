@@ -2,8 +2,11 @@ import { motion } from 'framer-motion';
 import { useData } from '../context/DataContext';
 import AnimatedSection from '../components/AnimatedSection';
 import NoticePopup from '../components/NoticePopup';
+import VideoShowcase from '../components/VideoShowcase';
+import FAQ from '../components/FAQ';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 import './Home.css';
 
 // Helper to get icon by string name
@@ -13,8 +16,9 @@ const getIcon = (iconName) => {
 };
 
 export default function Home() {
-    const { data } = useData();
+    const { data, setIsAdmissionFormOpen } = useData();
     const { home, blogs, notices, gallery, settings } = data;
+    const { t } = useTranslation();
 
     const latestBlogs = blogs.filter(b => b.published).slice(0, 3);
     const upcomingNotices = notices.slice(0, 3);
@@ -24,80 +28,112 @@ export default function Home() {
         <>
             <NoticePopup />
 
-            {/* Hero Section */}
-            <section className="hero" style={{ backgroundImage: `url(${home.hero.backgroundImage})` }}>
+            {/* Hero Section with Spline */}
+            <section className="hero hero-split">
                 <div className="hero-overlay"></div>
                 <div className="hero-bg-pattern"></div>
                 <div className="hero-content container">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="hero-logo-container"
-                        style={{ marginBottom: '2rem' }}
-                    >
-                        <img src={settings.logo} alt="School Logo" className="hero-logo" style={{ width: '120px', height: 'auto', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.3))' }} />
-                    </motion.div>
+                    <div className="hero-left">
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="hero-text"
-                    >
-                        <motion.span
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="hero-subtitle"
-                        >
-                            {home.hero.subtitle}
-                        </motion.span>
-                        <motion.h1
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3, duration: 0.5 }}
-                        >
-                            {home.hero.title}
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                        >
-                            {home.hero.description}
-                        </motion.p>
                         <motion.div
-                            className="hero-buttons"
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
+                            transition={{ duration: 0.6 }}
+                            className="hero-text"
                         >
-                            <Link to="/admissions" className="btn btn-primary btn-lg">
-                                Apply Now <Icons.FiArrowRight />
-                            </Link>
-                            <Link to="/about" className="btn btn-outline btn-lg">
-                                Learn More
-                            </Link>
-                        </motion.div>
+                            <div className="hero-text-bg-decoration"></div>
+                            <div className="hero-text-blob"></div>
+                            <div className="hero-text-blob-2"></div>
+                            <div className="hero-text-blob-3"></div>
+                            <div className="hero-text-blob-4"></div>
 
-                        {/* Quick Info Pills */}
-                        <motion.div
-                            className="hero-pills"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.8 }}
-                        >
-                            <div className="hero-pill">
-                                <Icons.FiMapPin /> Kathmandu, Nepal
-                            </div>
-                            <div className="hero-pill">
-                                <Icons.FiClock /> Est. 2010
-                            </div>
-                            <div className="hero-pill">
-                                <Icons.FiUsers /> 1500+ Students
-                            </div>
+                            {/* Floating Math/Education Equipment - More Crowded */}
+                            <div className="hero-equipment eq-1"><Icons.FiBook /></div>
+                            <div className="hero-equipment eq-2"><Icons.FiEdit3 /></div>
+                            <div className="hero-equipment eq-3"><Icons.FiCompass /></div>
+                            <div className="hero-equipment eq-4"><Icons.FiActivity /></div>
+                            <div className="hero-equipment eq-5"><Icons.FiLayers /></div>
+                            <div className="hero-equipment eq-6" style={{ fontWeight: 'bold' }}>π</div>
+                            <div className="hero-equipment eq-7"><Icons.FiPaperclip /></div>
+                            <div className="hero-equipment eq-8"><Icons.FiGlobe /></div>
+                            <div className="hero-equipment eq-9"><Icons.FiPenTool /></div>
+                            <div className="hero-equipment eq-10"><Icons.FiAward /></div>
+
+                            {/* Geometric Shapes */}
+                            <div className="hero-geo geo-rect"></div>
+                            <div className="hero-geo geo-square"></div>
+                            <div className="hero-geo geo-circle"></div>
+                            <div className="hero-geo geo-triangle"></div>
+
+                            <div className="hero-floating-shape shape-1"></div>
+                            <div className="hero-floating-shape shape-2"></div>
+                            <div className="hero-floating-shape shape-3"></div>
+
+                            <motion.span
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="hero-subtitle"
+                            >
+                                {/* Prefer translation if key exists (simulated), else use data or translation fallback */}
+                                {t('home.hero.subtitle')}
+                            </motion.span>
+                            <motion.h1
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.3, duration: 0.5 }}
+                            >
+                                {t('home.hero.title')}
+                            </motion.h1>
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.5 }}
+                            >
+                                {t('home.hero.description')}
+                            </motion.p>
+                            <motion.div
+                                className="hero-buttons"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6 }}
+                            >
+                                <button onClick={() => setIsAdmissionFormOpen(true)} className="btn btn-primary btn-lg">
+                                    {t('home.hero.applyNow')} <Icons.FiArrowRight />
+                                </button>
+                                <Link to="/about" className="btn btn-outline btn-lg">
+                                    {t('home.hero.learnMore')}
+                                </Link>
+                            </motion.div>
+
+                            {/* Quick Info Pills */}
+                            <motion.div
+                                className="hero-pills"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.8 }}
+                            >
+                                <div className="hero-pill">
+                                    <Icons.FiMapPin /> {t('home.hero.location')}
+                                </div>
+                                <div className="hero-pill">
+                                    <Icons.FiClock /> {t('home.hero.founded')}
+                                </div>
+                                <div className="hero-pill">
+                                    <Icons.FiUsers /> {t('home.hero.students')}
+                                </div>
+                            </motion.div>
                         </motion.div>
+                    </div>
+
+                    {/* Spline 3D Animation */}
+                    <motion.div
+                        className="hero-right"
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                    >
+                        <spline-viewer url="https://prod.spline.design/k0v196fCnQarCKhe/scene.splinecode"></spline-viewer>
                     </motion.div>
                 </div>
 
@@ -117,9 +153,9 @@ export default function Home() {
             <section className="section services-section">
                 <div className="container">
                     <AnimatedSection className="section-header text-center">
-                        <span className="section-badge">Why Choose Us</span>
-                        <h2>Nurturing Future Leaders</h2>
-                        <p>We provide a supportive environment where students thrive academically, socially, and emotionally.</p>
+                        <span className="section-badge">{t('home.chooseUs.badge')}</span>
+                        <h2>{t('home.chooseUs.title')}</h2>
+                        <p>{t('home.chooseUs.desc')}</p>
                     </AnimatedSection>
 
                     <div className="services-grid">
@@ -136,6 +172,8 @@ export default function Home() {
                                     <div className="service-icon">
                                         {getIcon(service.icon)}
                                     </div>
+                                    {/* Note: In a real i18n app, service content should also come from translation files or data structure with locales. 
+                                        For now we keep English content for dynamic lists unless we refactor data context. */}
                                     <h3>{service.title}</h3>
                                     <p>{service.desc}</p>
                                 </motion.div>
@@ -161,12 +199,10 @@ export default function Home() {
                         </AnimatedSection>
 
                         <AnimatedSection animation="fadeInRight" className="about-preview-content">
-                            <span className="section-badge">About Our School</span>
-                            <h2>A Legacy of Educational Excellence</h2>
+                            <span className="section-badge">{t('home.about.badge')}</span>
+                            <h2>{t('home.about.title')}</h2>
                             <p>
-                                Subhakamana School has been a beacon of quality education since 2010.
-                                Our commitment to nurturing young minds has helped thousands of students
-                                achieve their dreams.
+                                {t('home.about.text')}
                             </p>
 
                             <div className="features-list">
@@ -179,7 +215,7 @@ export default function Home() {
                             </div>
 
                             <Link to="/about" className="btn btn-primary">
-                                Read Our Story <Icons.FiArrowRight />
+                                {t('home.about.cta')} <Icons.FiArrowRight />
                             </Link>
                         </AnimatedSection>
                     </div>
@@ -190,9 +226,9 @@ export default function Home() {
             <section className="section programs-section">
                 <div className="container">
                     <AnimatedSection className="section-header text-center">
-                        <span className="section-badge">Our Programs</span>
-                        <h2>Academic Programs</h2>
-                        <p>Comprehensive education from primary to higher secondary level.</p>
+                        <span className="section-badge">{t('home.programs.badge')}</span>
+                        <h2>{t('home.programs.title')}</h2>
+                        <p>{t('home.programs.desc')}</p>
                     </AnimatedSection>
 
                     <div className="programs-grid">
@@ -246,9 +282,9 @@ export default function Home() {
             <section className="section testimonials-section">
                 <div className="container">
                     <AnimatedSection className="section-header text-center">
-                        <span className="section-badge">Testimonials</span>
-                        <h2>What Parents & Alumni Say</h2>
-                        <p>Hear from our community about their experiences.</p>
+                        <span className="section-badge">{t('home.testimonials.badge')}</span>
+                        <h2>{t('home.testimonials.title')}</h2>
+                        <p>{t('home.testimonials.desc')}</p>
                     </AnimatedSection>
 
                     <div className="testimonials-grid">
@@ -287,8 +323,8 @@ export default function Home() {
                         <AnimatedSection animation="fadeInLeft">
                             <div className="news-column">
                                 <div className="news-header">
-                                    <h3><Icons.FiCalendar /> Latest News</h3>
-                                    <Link to="/blog" className="view-all">View All <Icons.FiArrowRight /></Link>
+                                    <h3><Icons.FiCalendar /> {t('home.news.recentBlogs')}</h3>
+                                    <Link to="/blog" className="view-all">{t('home.news.viewAll')} <Icons.FiArrowRight /></Link>
                                 </div>
                                 <div className="news-list">
                                     {latestBlogs.length > 0 ? latestBlogs.map(blog => (
@@ -300,7 +336,7 @@ export default function Home() {
                                             </div>
                                         </Link>
                                     )) : (
-                                        <p className="no-content">No news available</p>
+                                        <p className="no-content">{t('home.news.noNews')}</p>
                                     )}
                                 </div>
                             </div>
@@ -310,8 +346,8 @@ export default function Home() {
                         <AnimatedSection animation="fadeInRight">
                             <div className="news-column">
                                 <div className="news-header">
-                                    <h3><Icons.FiTarget /> Recent Notices</h3>
-                                    <Link to="/notices" className="view-all">View All <Icons.FiArrowRight /></Link>
+                                    <h3><Icons.FiTarget /> {t('home.news.recentNotices')}</h3>
+                                    <Link to="/notices" className="view-all">{t('home.news.viewAll')} <Icons.FiArrowRight /></Link>
                                 </div>
                                 <div className="notices-list">
                                     {upcomingNotices.length > 0 ? upcomingNotices.map(notice => (
@@ -326,7 +362,7 @@ export default function Home() {
                                             </div>
                                         </div>
                                     )) : (
-                                        <p className="no-content">No notices available</p>
+                                        <p className="no-content">{t('home.news.noNotices')}</p>
                                     )}
                                 </div>
                             </div>
@@ -339,9 +375,9 @@ export default function Home() {
             <section className="section gallery-preview-section">
                 <div className="container">
                     <AnimatedSection className="section-header text-center">
-                        <span className="section-badge">Gallery</span>
-                        <h2>Campus Life</h2>
-                        <p>Glimpses of activities and events at our school.</p>
+                        <span className="section-badge">{t('home.gallery.badge')}</span>
+                        <h2>{t('home.gallery.title')}</h2>
+                        <p>{t('home.gallery.desc')}</p>
                     </AnimatedSection>
 
                     <div className="gallery-preview-grid">
@@ -362,27 +398,30 @@ export default function Home() {
 
                     <AnimatedSection className="text-center" style={{ marginTop: 'var(--space-8)' }}>
                         <Link to="/gallery" className="btn btn-primary">
-                            View Full Gallery <Icons.FiArrowRight />
+                            {t('home.gallery.viewFull')} <Icons.FiArrowRight />
                         </Link>
                     </AnimatedSection>
                 </div>
             </section>
+
+            {/* FAQ Section */}
+            <FAQ />
 
             {/* CTA Section */}
             <section className="cta-section">
                 <div className="container">
                     <div className="cta-content">
                         <AnimatedSection animation="fadeInLeft">
-                            <h2>Ready to Join Our Community?</h2>
-                            <p>Admissions are open for the upcoming academic session. Secure your child's future today.</p>
+                            <h2>{t('home.cta.title')}</h2>
+                            <p>{t('home.cta.desc')}</p>
                         </AnimatedSection>
                         <AnimatedSection animation="fadeInRight">
                             <div className="cta-buttons">
                                 <Link to="/admissions" className="btn btn-light btn-lg">
-                                    Apply Now <Icons.FiArrowRight />
+                                    {t('home.hero.applyNow')} <Icons.FiArrowRight />
                                 </Link>
                                 <Link to="/contact" className="btn btn-outline-dark btn-lg">
-                                    Contact Us
+                                    {t('home.cta.contactUs')}
                                 </Link>
                             </div>
                         </AnimatedSection>
@@ -392,3 +431,4 @@ export default function Home() {
         </>
     );
 }
+

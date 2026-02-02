@@ -8,7 +8,8 @@ import {
     FiImage,
     FiSettings,
     FiLogOut,
-    FiGrid
+    FiGrid,
+    FiUsers
 } from 'react-icons/fi';
 import './Admin.css';
 
@@ -32,7 +33,7 @@ export default function AdminLayout() {
             <aside className="admin-sidebar">
                 <div className="sidebar-header">
                     <h2>Admin Panel</h2>
-                    <span>Subhakamana School</span>
+                    <span>Merryland School</span>
                 </div>
 
                 <nav className="sidebar-nav">
@@ -40,6 +41,9 @@ export default function AdminLayout() {
                         <span className="nav-section-title">Main</span>
                         <NavLink to="/admin/dashboard" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
                             <FiGrid /> Dashboard
+                        </NavLink>
+                        <NavLink to="/admin/applications" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+                            <FiUsers /> Applications
                         </NavLink>
                     </div>
 

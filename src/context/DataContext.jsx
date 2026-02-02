@@ -27,6 +27,7 @@ export function DataProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
     const [isFirebaseEnabled, setIsFirebaseEnabled] = useState(false);
+    const [isAdmissionFormOpen, setIsAdmissionFormOpen] = useState(false);
 
     // Initialize Data
     useEffect(() => {
@@ -45,7 +46,7 @@ export function DataProvider({ children }) {
                     const newData = { ...initialData };
 
                     // Collections to fetch
-                    const collections = ['notices', 'blogs', 'gallery', 'pages', 'settings'];
+                    const collections = ['notices', 'blogs', 'gallery', 'pages', 'settings', 'messages'];
 
                     for (const colName of collections) {
                         const q = query(collection(db, colName));
@@ -65,6 +66,8 @@ export function DataProvider({ children }) {
                                 });
                             } else if (colName === 'settings') {
                                 if (items[0]) newData.settings = items[0];
+                            } else if (colName === 'messages') {
+                                newData.contactMessages = items;
                             } else {
                                 newData[colName] = items;
                             }
@@ -92,7 +95,13 @@ export function DataProvider({ children }) {
     const loadLocalData = () => {
         const savedData = localStorage.getItem(STORAGE_KEY);
         if (savedData) {
-            setData(JSON.parse(savedData));
+            const parsedData = JSON.parse(savedData);
+            // Migration: Ensure logo is using the new transparent PNG version
+            if (parsedData.settings && (parsedData.settings.logo === "/logo.jpeg" || parsedData.settings.logo === "/logo.png")) {
+                parsedData.settings.logo = "/logo.png?v=2";
+            }
+            // Merge with initialData to ensure new fields (like contactMessages) exist if missing in LS
+            setData({ ...initialData, ...parsedData });
         } else {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
         }
@@ -283,11 +292,39 @@ export function DataProvider({ children }) {
 
     const addContactMessage = (msg) => {
         const newMsg = { ...msg, id: Date.now().toString(), date: new Date().toISOString(), read: false };
+        console.log("Adding contact message:", newMsg); // DEBUG LOG
+        setData(prev => {
+            const currentMessages = prev.contactMessages || [];
+            console.log("Previous messages count:", currentMessages.length);
+            const newData = {
+                ...prev,
+                contactMessages: [newMsg, ...currentMessages]
+            };
+
+            // Force save to localStorage if not strict firebase mode (redundant but safe)
+            if (!auth) { // checking auth directly or capturing isFirebaseEnabled from closure (might be stale? no, state)
+                // Use the outer variable or just localStorage directly
+                // We need to verify if we should save.
+                // Ideally rely on useEffect but let's debug.
+                try {
+                    localStorage.setItem('subhakamana_school_data', JSON.stringify(newData));
+                    console.log("Forced save to localStorage successful");
+                } catch (e) {
+                    console.error("Forced save failed", e);
+                }
+            }
+            return newData;
+        });
+        syncDoc('messages', newMsg, newMsg.id);
+    };
+
+    const deleteContactMessage = (id) => {
+        console.log("Deleting contact message:", id);
         setData(prev => ({
             ...prev,
-            contactMessages: [newMsg, ...prev.contactMessages]
+            contactMessages: (prev.contactMessages || []).filter(msg => msg.id !== id)
         }));
-        syncDoc('messages', newMsg, newMsg.id);
+        deleteDocItem('messages', id);
     };
 
     return (
@@ -311,7 +348,10 @@ export function DataProvider({ children }) {
             updatePageContent,
             updateSettings,
             updateAdminCredentials,
-            addContactMessage
+            addContactMessage,
+            deleteContactMessage,
+            isAdmissionFormOpen,
+            setIsAdmissionFormOpen
         }}>
             {children}
         </DataContext.Provider>

@@ -2,19 +2,39 @@
 export const initialData = {
     // Site Settings
     settings: {
-        schoolName: "Subhakamana School",
+        schoolName: "Merryland School",
         tagline: "Nurturing Excellence, Building Future Leaders",
-        logo: "/logo.png",
-        email: "info@subhakamanaschool.edu.np",
+        logo: "/logo.png?v=2",
+        email: "info@merrylandschool.edu.np",
         phone: "+977-1-4567890",
+        whatsapp: "+977-9812345678",
+        callNumber: "+977-1-4567890",
         address: "Kalanki, Kathmandu, Nepal",
         mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.456!2d85.28!3d27.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDQyJzAwLjAiTiA4NcKwMTYnNDguMCJF!5e0!3m2!1sen!2snp!4v1234567890",
+        defaultLanguage: "en",
+        supportedLanguages: ["en", "ne"],
         socialLinks: {
-            facebook: "https://facebook.com/subhakamanaschool",
-            instagram: "https://instagram.com/subhakamanaschool",
-            twitter: "https://twitter.com/subhakamana",
-            youtube: "https://youtube.com/@subhakamanaschool"
-        }
+            facebook: "https://facebook.com/merrylandschool",
+            instagram: "https://instagram.com/merrylandschool",
+            twitter: "https://twitter.com/merrylandschool",
+            youtube: "https://youtube.com/@merrylandschool"
+        },
+        videos: [
+            {
+                id: "1",
+                title: "School Introduction",
+                url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                thumbnail: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop",
+                featured: true
+            },
+            {
+                id: "2",
+                title: "Campus Tour",
+                url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                thumbnail: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
+                featured: false
+            }
+        ]
     },
 
     // Admin Credentials
@@ -26,7 +46,7 @@ export const initialData = {
     // Home Page Content
     home: {
         hero: {
-            title: "Subhakamana School",
+            title: "Merryland School",
             subtitle: "Welcome to Excellence",
             description: "Empowering young minds with quality education, modern facilities, and a nurturing environment for holistic development since 2010.",
             backgroundImage: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1920"
@@ -55,7 +75,7 @@ export const initialData = {
             {
                 name: "Ramesh Sharma",
                 role: "Parent",
-                text: "Subhakamana School has transformed my child's learning journey. The teachers are dedicated and the environment is perfect for growth.",
+                text: "Merryland School has transformed my child's learning journey. The teachers are dedicated and the environment is perfect for growth.",
                 image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
             },
             {
@@ -67,7 +87,7 @@ export const initialData = {
             {
                 name: "Bikash Poudel",
                 role: "Alumni",
-                text: "The foundation I received at Subhakamana helped me succeed in university. Forever grateful to my teachers!",
+                text: "The foundation I received at Merryland School helped me succeed in university. Forever grateful to my teachers!",
                 image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
             }
         ],
@@ -93,7 +113,7 @@ export const initialData = {
             name: "Mr. Ram Prasad Sharma",
             title: "Principal",
             image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-            message: "At Subhakamana School, we believe every child has the potential to achieve greatness. Our dedicated faculty works tirelessly to nurture talent, build confidence, and instill values that will guide our students throughout their lives."
+            message: "At Merryland School, we believe every child has the potential to achieve greatness. Our dedicated faculty works tirelessly to nurture talent, build confidence, and instill values that will guide our students throughout their lives."
         },
         team: [
             { name: "Mrs. Sita Devi Thapa", role: "Vice Principal", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face" },
@@ -128,7 +148,7 @@ export const initialData = {
         ],
         contact: {
             phone: "+977-1-4567890",
-            email: "admissions@subhakamanaschool.edu.np"
+            email: "admissions@merrylandschool.edu.np"
         }
     },
 
@@ -178,7 +198,7 @@ export const initialData = {
             id: "1",
             title: "The Importance of Holistic Education in Modern Times",
             excerpt: "Discover why holistic education is crucial for developing well-rounded individuals in today's competitive world.",
-            content: "<p>Education today goes beyond textbooks and examinations. At Subhakamana School, we believe in nurturing the complete individual - mind, body, and spirit.</p><p>Our approach integrates academics with sports, arts, and character development to prepare students for real-world challenges. Students participate in clubs, houses, and leadership programs that help them work in teams and communicate with confidence.</p><p>Research shows that students who receive holistic education demonstrate better problem-solving skills, emotional intelligence, and adaptability. These are the qualities that define successful individuals in the 21st century.</p><p>At Subhakamana, every child is encouraged to discover their uniqueness and build a strong moral character alongside academic excellence.</p>",
+            content: "<p>Education today goes beyond textbooks and examinations. At Merryland School, we believe in nurturing the complete individual - mind, body, and spirit.</p><p>Our approach integrates academics with sports, arts, and character development to prepare students for real-world challenges. Students participate in clubs, houses, and leadership programs that help them work in teams and communicate with confidence.</p><p>Research shows that students who receive holistic education demonstrate better problem-solving skills, emotional intelligence, and adaptability. These are the qualities that define successful individuals in the 21st century.</p><p>At Merryland School, every child is encouraged to discover their uniqueness and build a strong moral character alongside academic excellence.</p>",
             image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=500&fit=crop",
             author: "Principal Ram Prasad Sharma",
             category: "Education",
@@ -214,7 +234,7 @@ export const initialData = {
             id: "4",
             title: "Sports Day Highlights: Celebrating Team Spirit",
             excerpt: "A colorful Sports Day filled with friendly competition, teamwork, and unforgettable memories.",
-            content: "<p>Our Annual Sports Day brought the entire Subhakamana family together on the school ground.</p><p>Students participated enthusiastically in track and field events, football, basketball, relay races, tug of war, and fun games for junior classes.</p><p>The house system created healthy competition as each house cheered for their teams and displayed excellent sportsmanship.</p><p>Parents and alumni also joined special events, making the day even more memorable. The program concluded with a prize distribution ceremony and a vote of thanks from the principal.</p>",
+            content: "<p>Our Annual Sports Day brought the entire Merryland School family together on the school ground.</p><p>Students participated enthusiastically in track and field events, football, basketball, relay races, tug of war, and fun games for junior classes.</p><p>The house system created healthy competition as each house cheered for their teams and displayed excellent sportsmanship.</p><p>Parents and alumni also joined special events, making the day even more memorable. The program concluded with a prize distribution ceremony and a vote of thanks from the principal.</p>",
             image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=500&fit=crop",
             author: "Sports Department",
             category: "Events",
@@ -226,7 +246,7 @@ export const initialData = {
             id: "5",
             title: "Parent–Teacher Partnership for Student Success",
             excerpt: "How regular communication between parents and teachers helps students perform better in school.",
-            content: "<p>At Subhakamana School, we strongly believe that education works best when parents and teachers work as a team.</p><p>Our regular Parent–Teacher Meetings give families a clear picture of their child's academic progress, behavior, and strengths.</p><p>During these interactions, teachers share practical tips on how parents can support learning at home – from creating a study routine to building good reading habits.</p><p>When parents, teachers, and students share the same goals, children feel supported and motivated to do their best.</p>",
+            content: "<p>At Merryland School, we strongly believe that education works best when parents and teachers work as a team.</p><p>Our regular Parent–Teacher Meetings give families a clear picture of their child's academic progress, behavior, and strengths.</p><p>During these interactions, teachers share practical tips on how parents can support learning at home – from creating a study routine to building good reading habits.</p><p>When parents, teachers, and students share the same goals, children feel supported and motivated to do their best.</p>",
             image: "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=800&h=500&fit=crop",
             author: "Examination Cell",
             category: "Education",

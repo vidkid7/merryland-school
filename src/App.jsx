@@ -4,6 +4,7 @@ import { DataProvider } from './context/DataContext';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import FloatingActions from './components/FloatingActions';
 
 // Pages
 import Home from './pages/Home';
@@ -24,6 +25,7 @@ import NoticesManager from './admin/NoticesManager';
 import BlogManager from './admin/BlogManager';
 import GalleryManager from './admin/GalleryManager';
 import SettingsManager from './admin/SettingsManager';
+import ApplicationsManager from './admin/ApplicationsManager';
 
 import './index.css';
 
@@ -49,6 +51,7 @@ function AnimatedRoutes() {
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="applications" element={<ApplicationsManager />} />
           <Route path="pages" element={<PagesEditor />} />
           <Route path="notices" element={<NoticesManager />} />
           <Route path="blogs" element={<BlogManager />} />
@@ -73,11 +76,17 @@ function ScrollToTop() {
 }
 
 function PublicLayout({ children }) {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main className={!isHome ? 'page-wrapper' : ''} style={{ flex: 1 }}>
+        {children}
+      </main>
       <Footer />
+      <FloatingActions />
     </div>
   );
 }

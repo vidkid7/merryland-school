@@ -17,7 +17,7 @@ export default function Footer() {
 
     const quickLinks = [
         { path: '/', label: 'Home' },
-        { path: '/about', label: 'About Us' },
+        { path: '/about', label: 'About' },
         { path: '/admissions', label: 'Admissions' },
         { path: '/blog', label: 'Blog' },
         { path: '/gallery', label: 'Gallery' },
@@ -63,18 +63,21 @@ export default function Footer() {
                                 values, and skills for a brighter tomorrow.
                             </p>
                             <div className="footer-social">
-                                <a href={data.settings.socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                    <FiFacebook />
-                                </a>
-                                <a href={data.settings.socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                    <FiInstagram />
-                                </a>
-                                <a href={data.settings.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                    <FiTwitter />
-                                </a>
-                                <a href={data.settings.socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                                    <FiYoutube />
-                                </a>
+                                <h5>Follow Us</h5>
+                                <div className="social-icons">
+                                    <a href={data.settings.socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                        <FiFacebook />
+                                    </a>
+                                    <a href={data.settings.socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                        <FiInstagram />
+                                    </a>
+                                    <a href={data.settings.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                        <FiTwitter />
+                                    </a>
+                                    <a href={data.settings.socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                        <FiYoutube />
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
