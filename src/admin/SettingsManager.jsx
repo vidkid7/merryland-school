@@ -23,7 +23,45 @@ export default function SettingsManager() {
         if (credentials.password) {
             updateAdminCredentials(credentials);
             setSaved(true);
+            setCredentials({ ...credentials, password: '' }); // Clear password field
             setTimeout(() => setSaved(false), 2000);
+        } else {
+            alert('Please enter a new password to update credentials.');
+        }
+    };
+
+    // Export data as JSON
+    const handleExportData = () => {
+        const dataStr = JSON.stringify(data, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `school-data-backup-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    };
+
+    // Import data from JSON
+    const handleImportData = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const importedData = JSON.parse(event.target.result);
+                    if (window.confirm('This will replace all current data. Are you sure?')) {
+                        localStorage.setItem('subhakamana_school_data', JSON.stringify(importedData));
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    alert('Error importing data. Please check the file format.');
+                    console.error('Import error:', error);
+                }
+            };
+            reader.readAsText(file);
         }
     };
 
@@ -188,6 +226,17 @@ export default function SettingsManager() {
                             </div>
                             <form onSubmit={handleCredentialsSubmit}>
                                 <div className="admin-card-body">
+                                    <div style={{ 
+                                        padding: 'var(--space-3)', 
+                                        background: 'var(--primary-50)', 
+                                        borderRadius: 'var(--radius-md)',
+                                        marginBottom: 'var(--space-4)',
+                                        fontSize: 'var(--text-sm)',
+                                        color: 'var(--primary-700)'
+                                    }}>
+                                        <strong>Note:</strong> Changes will be saved locally. Make sure to remember your new credentials!
+                                    </div>
+                                    
                                     <div className="form-group">
                                         <label className="form-label">Username</label>
                                         <input
@@ -214,6 +263,58 @@ export default function SettingsManager() {
                                     </button>
                                 </div>
                             </form>
+                        </div>
+
+                        <div className="admin-card">
+                            <div className="admin-card-header">
+                                <h3>Data Backup & Restore</h3>
+                            </div>
+                            <div className="admin-card-body">
+                                <div style={{ 
+                                    padding: 'var(--space-3)', 
+                                    background: 'var(--info-50)', 
+                                    borderRadius: 'var(--radius-md)',
+                                    marginBottom: 'var(--space-4)',
+                                    fontSize: 'var(--text-sm)',
+                                    color: 'var(--info-700)'
+                                }}>
+                                    <strong>Backup your data:</strong> Export all website data as a JSON file for safekeeping.
+                                </div>
+                                
+                                <button 
+                                    onClick={handleExportData} 
+                                    className="btn btn-primary"
+                                    style={{ marginBottom: 'var(--space-4)', width: '100%' }}
+                                >
+                                    <FiSave /> Export Data (Backup)
+                                </button>
+
+                                <div style={{ 
+                                    padding: 'var(--space-3)', 
+                                    background: 'var(--warning-50)', 
+                                    borderRadius: 'var(--radius-md)',
+                                    marginBottom: 'var(--space-4)',
+                                    fontSize: 'var(--text-sm)',
+                                    color: 'var(--warning-700)'
+                                }}>
+                                    <strong>Warning:</strong> Importing data will replace all current data. Make sure to backup first!
+                                </div>
+
+                                <label 
+                                    htmlFor="import-data" 
+                                    className="btn btn-secondary"
+                                    style={{ width: '100%', cursor: 'pointer', textAlign: 'center' }}
+                                >
+                                    <FiSave /> Import Data (Restore)
+                                </label>
+                                <input
+                                    id="import-data"
+                                    type="file"
+                                    accept=".json"
+                                    onChange={handleImportData}
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

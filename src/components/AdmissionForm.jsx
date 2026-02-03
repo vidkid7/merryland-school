@@ -31,7 +31,7 @@ export default function AdmissionForm({ isOpen, onClose }) {
     const validate = () => {
         const newErrors = {};
         if (!formData.studentName.trim()) newErrors.studentName = 'Student name is required';
-        if (!formData.dateOfBirth) newErrors.dateofBirth = 'Date of birth is required';
+        if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
         if (!formData.grade) newErrors.grade = 'Grade is required';
         if (!formData.parentName.trim()) newErrors.parentName = 'Parent/Guardian name is required';
         if (!formData.email.trim()) {
@@ -47,7 +47,6 @@ export default function AdmissionForm({ isOpen, onClose }) {
         if (!formData.address.trim()) newErrors.address = 'Address is required';
 
         setErrors(newErrors);
-        console.log("Validation result:", newErrors); // DEBUG LOG
         return Object.keys(newErrors).length === 0;
     };
 
@@ -55,11 +54,6 @@ export default function AdmissionForm({ isOpen, onClose }) {
         e.preventDefault();
 
         if (!validate()) {
-            console.log("Validation failed:", validate()); // Wrong usage, validate returns bool.
-            console.log("Validation errors:", errors); // Errors state might not be updated immediately because setState is async.
-            // Better to log the object computed inside validate() or just log "Validation failed" and let the user see the UI.
-            // But we can re-run validation logic to log it or trust the UI updates.
-            // Let's modify validate() to log errors.
             return;
         }
 
@@ -71,7 +65,7 @@ export default function AdmissionForm({ isOpen, onClose }) {
         };
 
         addContactMessage(applicationData);
-        console.log("Form submitted. Data:", applicationData); // DEBUG LOG
+        console.log("Application submitted successfully:", applicationData);
 
         setSubmitted(true);
         setTimeout(() => {

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useData } from '../context/DataContext';
-import { FiSave, FiPlus, FiTrash, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiSave, FiPlus, FiTrash, FiChevronDown, FiChevronUp, FiCheck } from 'react-icons/fi';
+import ImageUpload from './ImageUpload';
 
 // Helper component for editing arrays of objects
 const ArrayEditor = ({ items, onChange, schema, title, itemLabelKey = 'title' }) => {
@@ -62,22 +63,33 @@ const ArrayEditor = ({ items, onChange, schema, title, itemLabelKey = 'title' })
                     {expandedIndex === index && (
                         <div style={{ padding: 'var(--space-4)', background: 'var(--white)' }}>
                             {schema.map(field => (
-                                <div key={field.key} className="form-group">
-                                    <label className="form-label" style={{ fontSize: '0.8rem' }}>{field.label}</label>
-                                    {field.type === 'textarea' ? (
-                                        <textarea
-                                            className="form-textarea"
+                                <div key={field.key}>
+                                    {field.type === 'image' ? (
+                                        <ImageUpload
+                                            label={field.label}
                                             value={item[field.key] || ''}
-                                            onChange={e => handleChange(index, field.key, e.target.value)}
-                                            rows={2}
+                                            onChange={(url) => handleChange(index, field.key, url)}
                                         />
+                                    ) : field.type === 'textarea' ? (
+                                        <div className="form-group">
+                                            <label className="form-label" style={{ fontSize: '0.8rem' }}>{field.label}</label>
+                                            <textarea
+                                                className="form-textarea"
+                                                value={item[field.key] || ''}
+                                                onChange={e => handleChange(index, field.key, e.target.value)}
+                                                rows={2}
+                                            />
+                                        </div>
                                     ) : (
-                                        <input
-                                            type={field.type || 'text'}
-                                            className="form-input"
-                                            value={item[field.key] || ''}
-                                            onChange={e => handleChange(index, field.key, e.target.value)}
-                                        />
+                                        <div className="form-group">
+                                            <label className="form-label" style={{ fontSize: '0.8rem' }}>{field.label}</label>
+                                            <input
+                                                type={field.type || 'text'}
+                                                className="form-input"
+                                                value={item[field.key] || ''}
+                                                onChange={e => handleChange(index, field.key, e.target.value)}
+                                            />
+                                        </div>
                                     )}
                                 </div>
                             ))}
@@ -93,36 +105,125 @@ export default function PagesEditor() {
     const { data, updatePageContent } = useData();
     const [activeTab, setActiveTab] = useState('home');
     const [saved, setSaved] = useState(false);
+    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
-    // Local state for each page
+    // Local state for each page - initialize from context data
     const [homeData, setHomeData] = useState(data.home);
     const [aboutData, setAboutData] = useState(data.about);
     const [admissionsData, setAdmissionsData] = useState(data.admissions);
 
-    const handleSave = () => {
+    // Track changes
+    useEffect(() => {
+        setHasUnsavedChanges(true);
+    }, [homeData, aboutData, admissionsData]);
+
+    // Keyboard shortcut for save (Ctrl+S or Cmd+S)
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                handleSave();
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [activeTab, homeData, aboutData, admissionsData]);
+
+    // Sync local state when switching tabs to ensure we have latest data
+    const handleTabChange = (tab) => {
+        // Save current tab data before switching
+        handleSave();
+        setActiveTab(tab);
+        // Refresh data from context
+        setHomeData(data.home);
+        setAboutData(data.about);
+        setAdmissionsData(data.admissions);
+    };
+
+    const handleSave = useCallback(() => {
         if (activeTab === 'home') {
             updatePageContent('home', homeData);
+            console.log('✅ Home page content saved');
         } else if (activeTab === 'about') {
             updatePageContent('about', aboutData);
+            console.log('✅ About page content saved');
         } else if (activeTab === 'admissions') {
             updatePageContent('admissions', admissionsData);
+            console.log('✅ Admissions page content saved');
         }
+        setHasUnsavedChanges(false);
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
-    };
+    }, [activeTab, homeData, aboutData, admissionsData, updatePageContent]);
 
     return (
         <>
             <header className="admin-header">
                 <h1>Edit Pages</h1>
-                {saved && (
-                    <span style={{ color: 'var(--success-500)', fontWeight: 600 }}>
-                        ✓ Changes saved!
-                    </span>
-                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+                    {hasUnsavedChanges && !saved && (
+                        <span style={{ color: 'var(--warning-600)', fontSize: 'var(--text-sm)', fontWeight: 500 }}>
+                            Unsaved changes
+                        </span>
+                    )}
+                    {saved && (
+                        <span style={{ color: 'var(--success-500)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+                            <FiCheck /> Changes saved!
+                        </span>
+                    )}
+                </div>
             </header>
 
             <main className="admin-main">
+                {/* Floating Save Button */}
+                <div style={{
+                    position: 'fixed',
+                    bottom: 'var(--space-6)',
+                    right: 'var(--space-6)',
+                    zIndex: 1000
+                }}>
+                    <button 
+                        className="btn btn-primary btn-lg" 
+                        onClick={handleSave}
+                        style={{
+                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 'var(--space-2)',
+                            fontSize: '1rem',
+                            padding: '0.75rem 1.5rem',
+                            background: hasUnsavedChanges ? 'var(--primary-600)' : 'var(--success-600)',
+                            transition: 'all 0.2s ease'
+                        }}
+                        title="Save Changes (Ctrl+S)"
+                    >
+                        {saved ? <FiCheck /> : <FiSave />}
+                        {saved ? 'Saved!' : hasUnsavedChanges ? 'Save Changes' : 'All Saved'}
+                    </button>
+                </div>
+
+                {/* Info Banner */}
+                <div style={{ 
+                    padding: 'var(--space-4)', 
+                    background: 'var(--info-50)', 
+                    borderRadius: 'var(--radius-lg)',
+                    marginBottom: 'var(--space-6)',
+                    border: '1px solid var(--info-200)'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'start', gap: 'var(--space-3)' }}>
+                        <span style={{ fontSize: '1.5rem' }}>ℹ️</span>
+                        <div>
+                            <h4 style={{ margin: 0, marginBottom: 'var(--space-2)', color: 'var(--info-700)' }}>
+                                Edit Website Content
+                            </h4>
+                            <p style={{ margin: 0, fontSize: 'var(--text-sm)', color: 'var(--info-600)' }}>
+                                Make changes to your Home, About, and Admissions pages. Changes save instantly to localStorage and appear immediately on your website. 
+                                <strong> Press Ctrl+S or click the floating save button.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Tabs */}
                 <div style={{
                     display: 'flex',
@@ -133,7 +234,7 @@ export default function PagesEditor() {
                         <button
                             key={tab}
                             className={`btn ${activeTab === tab ? 'btn-primary' : 'btn-secondary'}`}
-                            onClick={() => setActiveTab(tab)}
+                            onClick={() => handleTabChange(tab)}
                             style={{ textTransform: 'capitalize' }}
                         >
                             {tab}
@@ -185,16 +286,54 @@ export default function PagesEditor() {
                                     rows={3}
                                 />
                             </div>
+                            
+                            <ImageUpload
+                                label="Hero Background Image"
+                                value={homeData.hero.backgroundImage}
+                                onChange={(url) => setHomeData({
+                                    ...homeData,
+                                    hero: { ...homeData.hero, backgroundImage: url }
+                                })}
+                            />
+
+                            <h4 style={{ marginBottom: 'var(--space-4)', marginTop: 'var(--space-6)' }}>Quick Info Pills</h4>
                             <div className="form-group">
-                                <label className="form-label">Background Image URL</label>
+                                <label className="form-label">Location</label>
                                 <input
-                                    type="url"
+                                    type="text"
                                     className="form-input"
-                                    value={homeData.hero.backgroundImage}
+                                    value={homeData.hero.location || ''}
                                     onChange={e => setHomeData({
                                         ...homeData,
-                                        hero: { ...homeData.hero, backgroundImage: e.target.value }
+                                        hero: { ...homeData.hero, location: e.target.value }
                                     })}
+                                    placeholder="e.g., Kalanki, Kathmandu"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Established</label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    value={homeData.hero.established || ''}
+                                    onChange={e => setHomeData({
+                                        ...homeData,
+                                        hero: { ...homeData.hero, established: e.target.value }
+                                    })}
+                                    placeholder="e.g., Founded 2010"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Students Count</label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    value={homeData.hero.students || ''}
+                                    onChange={e => setHomeData({
+                                        ...homeData,
+                                        hero: { ...homeData.hero, students: e.target.value }
+                                    })}
+                                    placeholder="e.g., 1500+ Students"
                                 />
                             </div>
 
@@ -219,7 +358,7 @@ export default function PagesEditor() {
                                     schema={[
                                         { key: 'title', label: 'Title' },
                                         { key: 'desc', label: 'Description', type: 'textarea' },
-                                        { key: 'image', label: 'Image URL' },
+                                        { key: 'image', label: 'Program Image', type: 'image' },
                                         { key: 'icon', label: 'Icon Name' }
                                     ]}
                                 />
@@ -233,7 +372,7 @@ export default function PagesEditor() {
                                         { key: 'name', label: 'Name' },
                                         { key: 'role', label: 'Role (e.g. Parent)' },
                                         { key: 'text', label: 'Testimonial', type: 'textarea' },
-                                        { key: 'image', label: 'Image URL' }
+                                        { key: 'image', label: 'Photo', type: 'image' }
                                     ]}
                                 />
 
@@ -248,10 +387,6 @@ export default function PagesEditor() {
                                     ]}
                                 />
                             </div>
-
-                            <button className="btn btn-primary" onClick={handleSave} style={{ marginTop: 'var(--space-4)' }}>
-                                <FiSave /> Save Changes
-                            </button>
                         </div>
                     </div>
                 )}
@@ -340,18 +475,15 @@ export default function PagesEditor() {
                                     rows={3}
                                 />
                             </div>
-                            <div className="form-group">
-                                <label className="form-label">Image URL</label>
-                                <input
-                                    type="text"
-                                    className="form-input"
-                                    value={aboutData.principal.image}
-                                    onChange={e => setAboutData({
-                                        ...aboutData,
-                                        principal: { ...aboutData.principal, image: e.target.value }
-                                    })}
-                                />
-                            </div>
+                            
+                            <ImageUpload
+                                label="Principal Photo"
+                                value={aboutData.principal.image}
+                                onChange={(url) => setAboutData({
+                                    ...aboutData,
+                                    principal: { ...aboutData.principal, image: url }
+                                })}
+                            />
 
                             <div style={{ marginTop: 'var(--space-8)' }}>
                                 <ArrayEditor
@@ -362,14 +494,10 @@ export default function PagesEditor() {
                                     schema={[
                                         { key: 'name', label: 'Name' },
                                         { key: 'role', label: 'Role' },
-                                        { key: 'image', label: 'Image URL' }
+                                        { key: 'image', label: 'Photo', type: 'image' }
                                     ]}
                                 />
                             </div>
-
-                            <button className="btn btn-primary" onClick={handleSave}>
-                                <FiSave /> Save Changes
-                            </button>
                         </div>
                     </div>
                 )}
@@ -446,10 +574,6 @@ export default function PagesEditor() {
                                     />
                                 </div>
                             </div>
-
-                            <button className="btn btn-primary" onClick={handleSave}>
-                                <FiSave /> Save Changes
-                            </button>
                         </div>
                     </div>
                 )}

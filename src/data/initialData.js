@@ -49,7 +49,10 @@ export const initialData = {
             title: "Merryland School",
             subtitle: "Welcome to Excellence",
             description: "Empowering young minds with quality education, modern facilities, and a nurturing environment for holistic development since 2010.",
-            backgroundImage: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1920"
+            backgroundImage: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1920",
+            location: "Kalanki, Kathmandu",
+            established: "Founded 2010",
+            students: "1500+ Students"
         },
         services: [
             { title: "Academic Excellence", desc: "Rigorous curriculum designed to challenge and inspire students at every level.", icon: "FiBookOpen" },

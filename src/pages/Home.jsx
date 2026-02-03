@@ -75,22 +75,21 @@ export default function Home() {
                                 transition={{ delay: 0.2 }}
                                 className="hero-subtitle"
                             >
-                                {/* Prefer translation if key exists (simulated), else use data or translation fallback */}
-                                {t('home.hero.subtitle')}
+                                {home.hero.subtitle}
                             </motion.span>
                             <motion.h1
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
                             >
-                                {t('home.hero.title')}
+                                {home.hero.title}
                             </motion.h1>
                             <motion.p
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.5 }}
                             >
-                                {t('home.hero.description')}
+                                {home.hero.description}
                             </motion.p>
                             <motion.div
                                 className="hero-buttons"
@@ -114,13 +113,13 @@ export default function Home() {
                                 transition={{ delay: 0.8 }}
                             >
                                 <div className="hero-pill">
-                                    <Icons.FiMapPin /> {t('home.hero.location')}
+                                    <Icons.FiMapPin /> {home.hero.location}
                                 </div>
                                 <div className="hero-pill">
-                                    <Icons.FiClock /> {t('home.hero.founded')}
+                                    <Icons.FiClock /> {home.hero.established}
                                 </div>
                                 <div className="hero-pill">
-                                    <Icons.FiUsers /> {t('home.hero.students')}
+                                    <Icons.FiUsers /> {home.hero.students}
                                 </div>
                             </motion.div>
                         </motion.div>

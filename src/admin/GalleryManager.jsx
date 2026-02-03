@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { FiPlus, FiEdit2, FiTrash2, FiX } from 'react-icons/fi';
+import ImageUpload from './ImageUpload';
 
 export default function GalleryManager() {
     const { data, addGalleryImage, updateGalleryImage, deleteGalleryImage } = useData();
@@ -137,33 +138,11 @@ export default function GalleryManager() {
                                     />
                                 </div>
 
-                                <div className="form-group">
-                                    <label className="form-label">Image URL</label>
-                                    <input
-                                        type="url"
-                                        className="form-input"
-                                        value={formData.image}
-                                        onChange={e => setFormData({ ...formData, image: e.target.value })}
-                                        required
-                                        placeholder="https://example.com/image.jpg"
-                                    />
-                                </div>
-
-                                {formData.image && (
-                                    <div className="form-group">
-                                        <label className="form-label">Preview</label>
-                                        <img
-                                            src={formData.image}
-                                            alt="Preview"
-                                            style={{
-                                                width: '100%',
-                                                maxHeight: '200px',
-                                                objectFit: 'cover',
-                                                borderRadius: 'var(--radius-lg)'
-                                            }}
-                                        />
-                                    </div>
-                                )}
+                                <ImageUpload
+                                    label="Gallery Image"
+                                    value={formData.image}
+                                    onChange={(url) => setFormData({ ...formData, image: url })}
+                                />
 
                                 <div className="form-group">
                                     <label className="form-label">Category</label>

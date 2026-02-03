@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { FiPlus, FiEdit2, FiTrash2, FiX, FiEye, FiEyeOff } from 'react-icons/fi';
+import ImageUpload from './ImageUpload';
 
 export default function BlogManager() {
     const { data, addBlog, updateBlog, deleteBlog } = useData();
@@ -182,16 +183,11 @@ export default function BlogManager() {
                                     </div>
                                 </div>
 
-                                <div className="form-group">
-                                    <label className="form-label">Image URL</label>
-                                    <input
-                                        type="url"
-                                        className="form-input"
-                                        value={formData.image}
-                                        onChange={e => setFormData({ ...formData, image: e.target.value })}
-                                        placeholder="https://example.com/image.jpg"
-                                    />
-                                </div>
+                                <ImageUpload
+                                    label="Blog Post Image"
+                                    value={formData.image}
+                                    onChange={(url) => setFormData({ ...formData, image: url })}
+                                />
 
                                 <div className="form-group">
                                     <label className="form-label">Excerpt (Short Description)</label>
