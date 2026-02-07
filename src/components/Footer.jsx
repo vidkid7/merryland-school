@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
+import { useTranslation } from 'react-i18next';
 import {
     FiPhone,
     FiMail,
@@ -14,22 +15,23 @@ import './Footer.css';
 
 export default function Footer() {
     const { data } = useData();
+    const { t } = useTranslation();
 
     const quickLinks = [
-        { path: '/', label: 'Home' },
-        { path: '/about', label: 'About' },
-        { path: '/admissions', label: 'Admissions' },
-        { path: '/blog', label: 'Blog' },
-        { path: '/gallery', label: 'Gallery' },
-        { path: '/contact', label: 'Contact' }
+        { path: '/', label: t('footer.links.home') },
+        { path: '/about', label: t('footer.links.about') },
+        { path: '/admissions', label: t('footer.links.admissions') },
+        { path: '/blog', label: t('footer.links.blog') },
+        { path: '/gallery', label: t('footer.links.gallery') },
+        { path: '/contact', label: t('footer.links.contact') }
     ];
 
     const usefulLinks = [
-        { path: '/notices', label: 'Notices' },
-        { path: '/admissions', label: 'Fee Structure' },
-        { path: '/about', label: 'Our Faculty' },
-        { path: '/gallery', label: 'Campus Tour' },
-        { path: '/contact', label: 'Careers' }
+        { path: '/notices', label: t('footer.links.notices') },
+        { path: '/admissions', label: t('footer.links.feeStructure') },
+        { path: '/about', label: t('footer.links.ourFaculty') },
+        { path: '/gallery', label: t('footer.links.campusTour') },
+        { path: '/contact', label: t('footer.links.careers') }
     ];
 
     return (
@@ -59,11 +61,10 @@ export default function Footer() {
                                 <span>{data.settings.schoolName}</span>
                             </Link>
                             <p className="footer-description">
-                                {data.settings.tagline}. Empowering students with knowledge,
-                                values, and skills for a brighter tomorrow.
+                                {data.settings.tagline}. {t('footer.description')}
                             </p>
                             <div className="footer-social">
-                                <h5>Follow Us</h5>
+                                <h5>{t('footer.followUs')}</h5>
                                 <div className="social-icons">
                                     <a href={data.settings.socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                         <FiFacebook />
@@ -83,7 +84,7 @@ export default function Footer() {
 
                         {/* Quick Links */}
                         <div className="footer-col">
-                            <h4 className="footer-heading">Quick Links</h4>
+                            <h4 className="footer-heading">{t('footer.quickLinks')}</h4>
                             <ul className="footer-links">
                                 {quickLinks.map(link => (
                                     <li key={link.path + link.label}>
@@ -97,7 +98,7 @@ export default function Footer() {
 
                         {/* Useful Links */}
                         <div className="footer-col">
-                            <h4 className="footer-heading">Useful Links</h4>
+                            <h4 className="footer-heading">{t('footer.usefulLinks')}</h4>
                             <ul className="footer-links">
                                 {usefulLinks.map(link => (
                                     <li key={link.path + link.label}>
@@ -111,7 +112,7 @@ export default function Footer() {
 
                         {/* Contact Info */}
                         <div className="footer-col">
-                            <h4 className="footer-heading">Contact Us</h4>
+                            <h4 className="footer-heading">{t('footer.contactUs')}</h4>
                             <div className="footer-contact">
                                 <div className="contact-item">
                                     <FiMapPin />
@@ -127,9 +128,9 @@ export default function Footer() {
                                 </div>
                             </div>
                             <div className="footer-hours">
-                                <h5>Office Hours</h5>
-                                <p>Sunday - Friday: 8:00 AM - 4:00 PM</p>
-                                <p>Saturday: Closed</p>
+                                <h5>{t('footer.officeHours')}</h5>
+                                <p>{t('footer.officeHoursDetail')}</p>
+                                <p>{t('footer.saturday')}</p>
                             </div>
                         </div>
                     </div>
@@ -139,9 +140,9 @@ export default function Footer() {
             {/* Bottom Bar */}
             <div className="footer-bottom">
                 <div className="container">
-                    <p>&copy; {new Date().getFullYear()} {data.settings.schoolName}. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} {data.settings.schoolName}. {t('footer.copyright')}</p>
                     <div className="footer-bottom-links">
-                        <Link to="/admin">Admin</Link>
+                        <Link to="/admin">{t('footer.admin')}</Link>
                     </div>
                 </div>
             </div>

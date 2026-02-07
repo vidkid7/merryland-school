@@ -9,6 +9,17 @@
         "contact": "Contact",
         "applyNow": "Apply Now"
     },
+    "common": {
+        "readMore": "Read More",
+        "viewAll": "View All",
+        "contactUs": "Contact Us",
+        "learnMore": "Learn More",
+        "all": "All",
+        "latest": "Latest",
+        "filterBy": "Filter by:",
+        "search": "Search",
+        "noResults": "No results found"
+    },
     "home": {
         "hero": {
             "subtitle": "Welcome to Subhakamana School",
@@ -58,6 +69,271 @@
             "title": "Ready to Join Our Community?",
             "desc": "Admissions are open for the upcoming academic session. Secure your child's future today.",
             "contactUs": "Contact Us"
+        }
+    },
+    "about": {
+        "badge": "About Us",
+        "hero": {
+            "title": "Building Tomorrow's Leaders Today",
+            "description": "Learn about our journey, mission, and the values that drive us to excel in education."
+        },
+        "story": {
+            "badge": "Our Story",
+            "title": "A Legacy of Excellence Since 2010",
+            "paragraph1": "Subhakamana School was founded with a vision to provide world-class education in Nepal. Starting with just 50 students and 5 teachers, we have grown into one of the most respected educational institutions in Kathmandu.",
+            "paragraph2": "Today, we serve over 1500 students with 85+ dedicated faculty members. Our alumni have gone on to achieve success in diverse fields, from medicine and engineering to arts and entrepreneurship.",
+            "years": "Years"
+        },
+        "principal": {
+            "badge": "Principal's Message",
+            "title": "Principal"
+        },
+        "values": {
+            "badge": "Our Principles",
+            "title": "Core Values",
+            "description": "The principles that guide everything we do",
+            "compassion": {
+                "title": "Compassion",
+                "description": "We foster empathy and care for others in our community."
+            },
+            "excellence": {
+                "title": "Excellence",
+                "description": "We strive for the highest standards in everything we do."
+            },
+            "teamwork": {
+                "title": "Teamwork",
+                "description": "We believe in the power of collaboration and mutual support."
+            },
+            "integrity": {
+                "title": "Integrity",
+                "description": "We uphold honesty and ethical behavior at all times."
+            }
+        },
+        "team": {
+            "badge": "Our Team",
+            "title": "Meet Our Leadership",
+            "description": "Dedicated professionals committed to excellence"
+        },
+        "cta": {
+            "title": "Experience Our Campus",
+            "description": "Schedule a visit to see our facilities and meet our team."
+        }
+    },
+    "blog": {
+        "badge": "Our Blog",
+        "hero": {
+            "title": "Insights & Updates",
+            "description": "Stay informed with the latest news, educational insights, and updates from our school community."
+        },
+        "search": "Search articles...",
+        "noResults": {
+            "title": "No articles found",
+            "description": "Try adjusting your search or filter criteria."
+        }
+    },
+    "notices": {
+        "badge": "Notices",
+        "hero": {
+            "title": "School Announcements",
+            "description": "Stay informed with the latest updates, events, and important announcements from our school."
+        },
+        "noResults": {
+            "title": "No notices found",
+            "description": "There are no notices in this category."
+        }
+    },
+    "gallery": {
+        "badge": "Gallery",
+        "hero": {
+            "title": "Our School in Pictures",
+            "description": "Explore moments captured from our campus, events, and daily life at Subhakamana School."
+        },
+        "noResults": {
+            "title": "No images found",
+            "description": "There are no images in this category."
+        }
+    },
+    "contact": {
+        "badge": "Contact Us",
+        "hero": {
+            "title": "Get in Touch",
+            "description": "Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+        },
+        "info": {
+            "title": "Contact Information",
+            "description": "Feel free to reach out to us through any of the following channels:",
+            "address": "Address",
+            "phone": "Phone",
+            "email": "Email",
+            "hours": "Office Hours",
+            "hoursDetail": "Sunday - Friday: 8:00 AM - 4:00 PM",
+            "saturday": "Saturday: Closed"
+        },
+        "form": {
+            "title": "Send us a Message",
+            "name": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone Number",
+            "subject": "Subject",
+            "message": "Message",
+            "namePlaceholder": "Your full name",
+            "emailPlaceholder": "your@email.com",
+            "phonePlaceholder": "+977-XXXXXXXXXX",
+            "subjectPlaceholder": "How can we help?",
+            "messagePlaceholder": "Write your message here...",
+            "submit": "Send Message",
+            "required": "*"
+        },
+        "success": {
+            "title": "Thank You!",
+            "message": "Your message has been sent successfully. We'll get back to you soon."
+        }
+    },
+    "admissions": {
+        "badge": "Admissions",
+        "process": {
+            "title": "Admission Process",
+            "description": "Simple steps to become a part of our school family"
+        },
+        "requirements": {
+            "title": "Requirements",
+            "description": "Please prepare the following documents for admission:",
+            "button": "Start Application"
+        },
+        "fees": {
+            "title": "Fee Structure",
+            "description": "Investment in your child's future:",
+            "admission": "Admission Fee",
+            "annual": "Annual Fee",
+            "monthly": "Monthly Fee",
+            "note": "* Fees are subject to change. Contact us for current rates.",
+            "enquire": "Enquire about fees"
+        },
+        "cta": {
+            "title": "Ready to join Merryland?",
+            "description": "Apply today and give your child the best education journey.",
+            "apply": "Open Application Form",
+            "call": "Call Us",
+            "email": "Email Us"
+        }
+    },
+    "faq": {
+        "badge": "FAQ",
+        "title": "Frequently Asked Questions",
+        "description": "Find answers to common questions about Merryland School",
+        "stillHaveQuestions": "Still have questions?",
+        "contactUs": "Contact Us",
+        "questions": {
+            "q1": {
+                "question": "What grades does Merryland School offer?",
+                "answer": "Merryland School offers education from Nursery to Grade 10, providing a comprehensive learning environment for students aged 3 to 16 years."
+            },
+            "q2": {
+                "question": "What is the admission process?",
+                "answer": "The admission process involves filling out an online application form, submitting required documents, attending an interview, and completing an entrance assessment. Click the 'Apply Now' button to start your application."
+            },
+            "q3": {
+                "question": "What are the school hours?",
+                "answer": "Our school operates from 8:00 AM to 3:30 PM from Sunday to Friday. We also offer extended day programs for working parents."
+            },
+            "q4": {
+                "question": "What curriculum does the school follow?",
+                "answer": "Merryland School follows the national curriculum prescribed by the Government of Nepal, integrated with modern teaching methodologies and international best practices."
+            },
+            "q5": {
+                "question": "Do you provide transportation services?",
+                "answer": "Yes, we provide safe and reliable bus transportation covering major areas of Kathmandu Valley. Our buses are equipped with GPS tracking and trained staff."
+            },
+            "q6": {
+                "question": "What extracurricular activities are available?",
+                "answer": "We offer a wide range of activities including sports (football, basketball, cricket), arts (music, dance, painting), technology clubs, debate teams, and community service programs."
+            },
+            "q7": {
+                "question": "What are the class sizes?",
+                "answer": "We maintain a student-teacher ratio of 1:20 to ensure personalized attention and effective learning for every student."
+            },
+            "q8": {
+                "question": "Are there scholarships available?",
+                "answer": "Yes, we offer merit-based and need-based scholarships to deserving students. Please contact our admissions office for detailed information on scholarship opportunities."
+            }
+        }
+    },
+    "admissionForm": {
+        "title": "Apply for Admission",
+        "subtitle": "Fill out the form below and we'll get back to you within 24 hours",
+        "studentName": "Student Name",
+        "dateOfBirth": "Date of Birth",
+        "grade": "Grade Applying For",
+        "selectGrade": "Select Grade",
+        "parentName": "Parent/Guardian Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "additionalInfo": "Additional Information",
+        "additionalInfoPlaceholder": "Any special requirements or questions...",
+        "submit": "Submit Application",
+        "required": "*",
+        "placeholders": {
+            "studentName": "Enter student's full name",
+            "parentName": "Enter parent/guardian name",
+            "email": "your@email.com",
+            "phone": "+977-XXX-XXXXXXX",
+            "address": "Your full address"
+        },
+        "errors": {
+            "studentNameRequired": "Student name is required",
+            "dobRequired": "Date of birth is required",
+            "gradeRequired": "Grade is required",
+            "parentNameRequired": "Parent/Guardian name is required",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Email is invalid",
+            "phoneRequired": "Phone is required",
+            "phoneInvalid": "Phone number is invalid",
+            "addressRequired": "Address is required"
+        },
+        "success": {
+            "title": "Application Submitted!",
+            "message": "Thank you for applying to Merryland School. We'll review your application and contact you within 24 hours."
+        },
+        "grades": {
+            "nursery": "Nursery",
+            "lkg": "LKG",
+            "ukg": "UKG",
+            "grade1": "Grade 1",
+            "grade2": "Grade 2",
+            "grade3": "Grade 3",
+            "grade4": "Grade 4",
+            "grade5": "Grade 5",
+            "grade6": "Grade 6",
+            "grade7": "Grade 7",
+            "grade8": "Grade 8",
+            "grade9": "Grade 9",
+            "grade10": "Grade 10"
+        }
+    },
+    "footer": {
+        "description": "Empowering students with knowledge, values, and skills for a brighter tomorrow.",
+        "followUs": "Follow Us",
+        "quickLinks": "Quick Links",
+        "usefulLinks": "Useful Links",
+        "contactUs": "Contact Us",
+        "officeHours": "Office Hours",
+        "officeHoursDetail": "Sunday - Friday: 8:00 AM - 4:00 PM",
+        "saturday": "Saturday: Closed",
+        "copyright": "All rights reserved.",
+        "admin": "Admin",
+        "links": {
+            "home": "Home",
+            "about": "About",
+            "admissions": "Admissions",
+            "blog": "Blog",
+            "gallery": "Gallery",
+            "contact": "Contact",
+            "notices": "Notices",
+            "feeStructure": "Fee Structure",
+            "ourFaculty": "Our Faculty",
+            "campusTour": "Campus Tour",
+            "careers": "Careers"
         }
     }
 }

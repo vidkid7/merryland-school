@@ -32,7 +32,20 @@
     border-bottom: 1px solid var(--neutral-100);
     position: sticky;
     top: 80px;
-    z-index: var(--z-sticky);
+    z-index: 90; /* Lower than header (100) to prevent overlap */
+    /* Performance optimizations for smooth scrolling */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Add subtle shadow only on scroll - handled by JS if needed */
+    transition: box-shadow var(--transition-fast);
+}
+
+/* Adjust top position for mobile to account for smaller header */
+@media (max-width: 768px) {
+    .blog-filters {
+        top: 60px; /* Smaller header on mobile */
+    }
 }
 
 .filters-content {
@@ -123,14 +136,17 @@
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-md);
-    transition: all var(--transition-base);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
     text-decoration: none;
     display: flex;
     flex-direction: column;
+    /* GPU acceleration for smooth hover */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
 }
 
 .blog-card-large:hover {
-    transform: translateY(-10px);
+    transform: translate3d(0, -10px, 0);
     box-shadow: var(--shadow-xl);
 }
 

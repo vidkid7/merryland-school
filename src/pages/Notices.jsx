@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useData } from '../context/DataContext';
+import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../components/AnimatedSection';
 import { FiCalendar, FiFilter, FiBell } from 'react-icons/fi';
 import './Notices.css';
 
 export default function Notices() {
     const { data } = useData();
+    const { t } = useTranslation();
     const [selectedCategory, setSelectedCategory] = useState('All');
 
     const categories = ['All', ...new Set(data.notices.map(n => n.category))];
@@ -20,9 +22,9 @@ export default function Notices() {
             <section className="notices-hero">
                 <div className="container">
                     <AnimatedSection className="notices-hero-content">
-                        <span className="page-badge">Notices</span>
-                        <h1>School Announcements</h1>
-                        <p>Stay informed with the latest updates, events, and important announcements from our school.</p>
+                        <span className="page-badge">{t('notices.badge')}</span>
+                        <h1>{t('notices.hero.title')}</h1>
+                        <p>{t('notices.hero.description')}</p>
                     </AnimatedSection>
                 </div>
             </section>
@@ -32,7 +34,7 @@ export default function Notices() {
                 <div className="container">
                     <div className="filter-content">
                         <div className="filter-label">
-                            <FiFilter /> Filter by:
+                            <FiFilter /> {t('common.filterBy')}
                         </div>
                         <div className="filter-buttons">
                             {categories.map(category => (
@@ -55,15 +57,15 @@ export default function Notices() {
                     {filteredNotices.length === 0 ? (
                         <div className="no-notices">
                             <FiBell />
-                            <h3>No notices found</h3>
-                            <p>There are no notices in this category.</p>
+                            <h3>{t('notices.noResults.title')}</h3>
+                            <p>{t('notices.noResults.description')}</p>
                         </div>
                     ) : (
                         <div className="notices-list">
                             {filteredNotices.map((notice, index) => (
                                 <AnimatedSection key={notice.id} animation="fadeInUp" delay={index * 100}>
                                     <div className={`notice-item ${notice.isLatest ? 'latest' : ''}`}>
-                                        {notice.isLatest && <span className="latest-badge">Latest</span>}
+                                        {notice.isLatest && <span className="latest-badge">{t('common.latest')}</span>}
                                         <div className="notice-date-box">
                                             <span className="date-day">
                                                 {new Date(notice.date).getDate()}

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useData } from '../context/DataContext';
+import { useTranslation } from 'react-i18next';
 import { FiX, FiUser, FiMail, FiPhone, FiCalendar, FiFileText } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import './AdmissionForm.css';
 
 export default function AdmissionForm({ isOpen, onClose }) {
     const { addContactMessage } = useData();
+    const { t } = useTranslation();
     const [formData, setFormData] = useState({
         studentName: '',
         dateOfBirth: '',
@@ -30,21 +32,21 @@ export default function AdmissionForm({ isOpen, onClose }) {
 
     const validate = () => {
         const newErrors = {};
-        if (!formData.studentName.trim()) newErrors.studentName = 'Student name is required';
-        if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
-        if (!formData.grade) newErrors.grade = 'Grade is required';
-        if (!formData.parentName.trim()) newErrors.parentName = 'Parent/Guardian name is required';
+        if (!formData.studentName.trim()) newErrors.studentName = t('admissionForm.errors.studentNameRequired');
+        if (!formData.dateOfBirth) newErrors.dateOfBirth = t('admissionForm.errors.dobRequired');
+        if (!formData.grade) newErrors.grade = t('admissionForm.errors.gradeRequired');
+        if (!formData.parentName.trim()) newErrors.parentName = t('admissionForm.errors.parentNameRequired');
         if (!formData.email.trim()) {
-            newErrors.email = 'Email is required';
+            newErrors.email = t('admissionForm.errors.emailRequired');
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            newErrors.email = 'Email is invalid';
+            newErrors.email = t('admissionForm.errors.emailInvalid');
         }
         if (!formData.phone.trim()) {
-            newErrors.phone = 'Phone is required';
+            newErrors.phone = t('admissionForm.errors.phoneRequired');
         } else if (!/^\+?[\d\s-]+$/.test(formData.phone)) {
-            newErrors.phone = 'Phone number is invalid';
+            newErrors.phone = t('admissionForm.errors.phoneInvalid');
         }
-        if (!formData.address.trim()) newErrors.address = 'Address is required';
+        if (!formData.address.trim()) newErrors.address = t('admissionForm.errors.addressRequired');
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -104,15 +106,15 @@ export default function AdmissionForm({ isOpen, onClose }) {
                     {!submitted ? (
                         <>
                             <div className="form-header">
-                                <h2>Apply for Admission</h2>
-                                <p>Fill out the form below and we'll get back to you within 24 hours</p>
+                                <h2>{t('admissionForm.title')}</h2>
+                                <p>{t('admissionForm.subtitle')}</p>
                             </div>
 
                             <form onSubmit={handleSubmit} className="admission-form">
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label className="form-label">
-                                            <FiUser /> Student Name *
+                                            <FiUser /> {t('admissionForm.studentName')} {t('admissionForm.required')}
                                         </label>
                                         <input
                                             type="text"
@@ -120,14 +122,14 @@ export default function AdmissionForm({ isOpen, onClose }) {
                                             className={`form-input ${errors.studentName ? 'error' : ''}`}
                                             value={formData.studentName}
                                             onChange={handleChange}
-                                            placeholder="Enter student's full name"
+                                            placeholder={t('admissionForm.placeholders.studentName')}
                                         />
                                         {errors.studentName && <span className="error-message">{errors.studentName}</span>}
                                     </div>
 
                                     <div className="form-group">
                                         <label className="form-label">
-                                            <FiCalendar /> Date of Birth *
+                                            <FiCalendar /> {t('admissionForm.dateOfBirth')} {t('admissionForm.required')}
                                         </label>
                                         <input
                                             type="date"
@@ -142,7 +144,7 @@ export default function AdmissionForm({ isOpen, onClose }) {
 
                                 <div className="form-group">
                                     <label className="form-label">
-                                        <FiFileText /> Grade Applying For *
+                                        <FiFileText /> {t('admissionForm.grade')} {t('admissionForm.required')}
                                     </label>
                                     <select
                                         name="grade"
@@ -150,27 +152,27 @@ export default function AdmissionForm({ isOpen, onClose }) {
                                         value={formData.grade}
                                         onChange={handleChange}
                                     >
-                                        <option value="">Select Grade</option>
-                                        <option value="Nursery">Nursery</option>
-                                        <option value="LKG">LKG</option>
-                                        <option value="UKG">UKG</option>
-                                        <option value="Grade 1">Grade 1</option>
-                                        <option value="Grade 2">Grade 2</option>
-                                        <option value="Grade 3">Grade 3</option>
-                                        <option value="Grade 4">Grade 4</option>
-                                        <option value="Grade 5">Grade 5</option>
-                                        <option value="Grade 6">Grade 6</option>
-                                        <option value="Grade 7">Grade 7</option>
-                                        <option value="Grade 8">Grade 8</option>
-                                        <option value="Grade 9">Grade 9</option>
-                                        <option value="Grade 10">Grade 10</option>
+                                        <option value="">{t('admissionForm.selectGrade')}</option>
+                                        <option value="Nursery">{t('admissionForm.grades.nursery')}</option>
+                                        <option value="LKG">{t('admissionForm.grades.lkg')}</option>
+                                        <option value="UKG">{t('admissionForm.grades.ukg')}</option>
+                                        <option value="Grade 1">{t('admissionForm.grades.grade1')}</option>
+                                        <option value="Grade 2">{t('admissionForm.grades.grade2')}</option>
+                                        <option value="Grade 3">{t('admissionForm.grades.grade3')}</option>
+                                        <option value="Grade 4">{t('admissionForm.grades.grade4')}</option>
+                                        <option value="Grade 5">{t('admissionForm.grades.grade5')}</option>
+                                        <option value="Grade 6">{t('admissionForm.grades.grade6')}</option>
+                                        <option value="Grade 7">{t('admissionForm.grades.grade7')}</option>
+                                        <option value="Grade 8">{t('admissionForm.grades.grade8')}</option>
+                                        <option value="Grade 9">{t('admissionForm.grades.grade9')}</option>
+                                        <option value="Grade 10">{t('admissionForm.grades.grade10')}</option>
                                     </select>
                                     {errors.grade && <span className="error-message">{errors.grade}</span>}
                                 </div>
 
                                 <div className="form-group">
                                     <label className="form-label">
-                                        <FiUser /> Parent/Guardian Name *
+                                        <FiUser /> {t('admissionForm.parentName')} {t('admissionForm.required')}
                                     </label>
                                     <input
                                         type="text"
@@ -178,7 +180,7 @@ export default function AdmissionForm({ isOpen, onClose }) {
                                         className={`form-input ${errors.parentName ? 'error' : ''}`}
                                         value={formData.parentName}
                                         onChange={handleChange}
-                                        placeholder="Enter parent/guardian name"
+                                        placeholder={t('admissionForm.placeholders.parentName')}
                                     />
                                     {errors.parentName && <span className="error-message">{errors.parentName}</span>}
                                 </div>
@@ -186,7 +188,7 @@ export default function AdmissionForm({ isOpen, onClose }) {
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label className="form-label">
-                                            <FiMail /> Email *
+                                            <FiMail /> {t('admissionForm.email')} {t('admissionForm.required')}
                                         </label>
                                         <input
                                             type="email"
@@ -194,14 +196,14 @@ export default function AdmissionForm({ isOpen, onClose }) {
                                             className={`form-input ${errors.email ? 'error' : ''}`}
                                             value={formData.email}
                                             onChange={handleChange}
-                                            placeholder="your@email.com"
+                                            placeholder={t('admissionForm.placeholders.email')}
                                         />
                                         {errors.email && <span className="error-message">{errors.email}</span>}
                                     </div>
 
                                     <div className="form-group">
                                         <label className="form-label">
-                                            <FiPhone /> Phone *
+                                            <FiPhone /> {t('admissionForm.phone')} {t('admissionForm.required')}
                                         </label>
                                         <input
                                             type="tel"
@@ -209,39 +211,39 @@ export default function AdmissionForm({ isOpen, onClose }) {
                                             className={`form-input ${errors.phone ? 'error' : ''}`}
                                             value={formData.phone}
                                             onChange={handleChange}
-                                            placeholder="+977-XXX-XXXXXXX"
+                                            placeholder={t('admissionForm.placeholders.phone')}
                                         />
                                         {errors.phone && <span className="error-message">{errors.phone}</span>}
                                     </div>
                                 </div>
 
                                 <div className="form-group">
-                                    <label className="form-label">Address *</label>
+                                    <label className="form-label">{t('admissionForm.address')} {t('admissionForm.required')}</label>
                                     <input
                                         type="text"
                                         name="address"
                                         className={`form-input ${errors.address ? 'error' : ''}`}
                                         value={formData.address}
                                         onChange={handleChange}
-                                        placeholder="Your full address"
+                                        placeholder={t('admissionForm.placeholders.address')}
                                     />
                                     {errors.address && <span className="error-message">{errors.address}</span>}
                                 </div>
 
                                 <div className="form-group">
-                                    <label className="form-label">Additional Information</label>
+                                    <label className="form-label">{t('admissionForm.additionalInfo')}</label>
                                     <textarea
                                         name="message"
                                         className="form-textarea"
                                         value={formData.message}
                                         onChange={handleChange}
                                         rows="4"
-                                        placeholder="Any special requirements or questions..."
+                                        placeholder={t('admissionForm.additionalInfoPlaceholder')}
                                     ></textarea>
                                 </div>
 
                                 <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }}>
-                                    Submit Application
+                                    {t('admissionForm.submit')}
                                 </button>
                             </form>
                         </>
@@ -255,8 +257,8 @@ export default function AdmissionForm({ isOpen, onClose }) {
                             >
                                 ✓
                             </motion.div>
-                            <h2>Application Submitted!</h2>
-                            <p>Thank you for applying to Merryland School. We'll review your application and contact you within 24 hours.</p>
+                            <h2>{t('admissionForm.success.title')}</h2>
+                            <p>{t('admissionForm.success.message')}</p>
                         </div>
                     )}
                 </motion.div>

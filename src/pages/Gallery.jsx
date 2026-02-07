@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useData } from '../context/DataContext';
+import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../components/AnimatedSection';
 import Lightbox from '../components/Lightbox';
 import { FiImage } from 'react-icons/fi';
@@ -7,6 +8,7 @@ import './Gallery.css';
 
 export default function Gallery() {
     const { data } = useData();
+    const { t } = useTranslation();
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -28,9 +30,9 @@ export default function Gallery() {
             <section className="gallery-hero">
                 <div className="container">
                     <AnimatedSection className="gallery-hero-content">
-                        <span className="page-badge">Gallery</span>
-                        <h1>Our School in Pictures</h1>
-                        <p>Explore moments captured from our campus, events, and daily life at Subhakamana School.</p>
+                        <span className="page-badge">{t('gallery.badge')}</span>
+                        <h1>{t('gallery.hero.title')}</h1>
+                        <p>{t('gallery.hero.description')}</p>
                     </AnimatedSection>
                 </div>
             </section>
@@ -58,8 +60,8 @@ export default function Gallery() {
                     {filteredGallery.length === 0 ? (
                         <div className="no-images">
                             <FiImage />
-                            <h3>No images found</h3>
-                            <p>There are no images in this category.</p>
+                            <h3>{t('gallery.noResults.title')}</h3>
+                            <p>{t('gallery.noResults.description')}</p>
                         </div>
                     ) : (
                         <div className="gallery-grid">

@@ -57,7 +57,7 @@
     z-index: -1;
     filter: blur(60px);
     opacity: 0.8;
-    will-change: transform, opacity;
+    /* Removed will-change - only add dynamically when animating */
 }
 
 .hero-text-blob {
@@ -70,7 +70,10 @@
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     z-index: -1;
     animation: blobMorph 12s infinite alternate linear;
-    will-change: transform, border-radius;
+    /* Use transform3d for GPU acceleration */
+    transform: translate3d(0, 0, 0);
+    /* CSS containment for better performance */
+    contain: layout style paint;
 }
 
 .hero-text-blob-2 {
@@ -84,39 +87,20 @@
     z-index: -1;
     animation: blobMorph 8s infinite alternate-reverse linear;
     filter: blur(25px);
+    transform: translate3d(0, 0, 0);
+    contain: layout style paint;
 }
 
-.hero-text-blob-3 {
-    position: absolute;
-    top: 20%;
-    right: -10%;
-    width: 180px;
-    height: 180px;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.05));
-    border-radius: 50%;
-    z-index: -1;
-    animation: blobMorph 15s infinite alternate linear;
-    filter: blur(30px);
-}
+/* Removed blob-3 and blob-4 to reduce concurrent animations */
 
-.hero-text-blob-4 {
-    position: absolute;
-    bottom: 20%;
-    left: -15%;
-    width: 220px;
-    height: 220px;
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(245, 158, 11, 0.05));
-    border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
-    z-index: -1;
-    animation: blobMorph 10s infinite alternate-reverse linear;
-    filter: blur(20px);
-}
-
+/* Reduced to 3 floating shapes for better performance */
 .hero-floating-shape {
     position: absolute;
     z-index: -1;
     opacity: 0.15;
     animation: float 10s infinite ease-in-out;
+    transform: translate3d(0, 0, 0);
+    contain: layout style paint;
 }
 
 .shape-1 {
@@ -146,11 +130,12 @@
     height: 50px;
     border: 4px solid var(--accent-300);
     border-radius: 8px;
-    transform: rotate(45deg);
+    transform: rotate(45deg) translate3d(0, 0, 0);
     animation: float 12s infinite ease-in-out reverse;
     animation-delay: -5s;
 }
 
+/* Reduced equipment elements from 10 to 4 for better performance */
 .hero-equipment {
     position: absolute;
     z-index: -1;
@@ -159,10 +144,12 @@
     font-size: 3.5rem;
     pointer-events: none;
     animation: dynamicFloat 8s infinite ease-in-out;
-    will-change: transform;
+    /* Use transform3d for GPU acceleration */
+    transform: translate3d(0, 0, 0);
+    contain: layout style paint;
 }
 
-/* Distribution */
+/* Keep only 4 equipment elements */
 .eq-1 {
     top: -10%;
     left: 5%;
@@ -185,120 +172,38 @@
     animation-delay: -2s;
 }
 
-.eq-4 {
-    top: 50%;
-    right: 10%;
-    color: var(--primary-400);
-    animation-delay: -3.5s;
-}
-
-.eq-5 {
-    bottom: 20%;
-    right: -5%;
-    color: var(--primary-800);
-    animation-delay: -5s;
-    font-size: 3rem;
-}
-
 .eq-6 {
     top: 5%;
     left: 30%;
     color: var(--neutral-400);
     font-size: 5rem;
     font-family: serif;
+    /* Static element - no animation */
+    animation: none;
 }
 
-.eq-7 {
-    top: 40%;
-    left: -10%;
-    color: var(--accent-400);
-    animation-delay: -1.5s;
-}
+/* Removed eq-4, eq-5, eq-7, eq-8, eq-9, eq-10 to reduce concurrent animations */
 
-.eq-8 {
-    bottom: -5%;
-    right: 25%;
-    color: var(--primary-300);
-    animation-delay: -6s;
-}
+/* Removed geometric shapes to reduce concurrent animations */
 
-.eq-9 {
-    top: 25%;
-    left: -5%;
-    color: var(--primary-500);
-    animation-delay: -4s;
-}
-
-.eq-10 {
-    bottom: 35%;
-    left: 30%;
-    color: var(--accent-500);
-    animation-delay: -7s;
-}
-
-/* New Geometric Shapes */
-.hero-geo {
-    position: absolute;
-    z-index: -1;
-    opacity: 0.25;
-    animation: dynamicFloat 10s infinite ease-in-out reverse;
-    will-change: transform;
-}
-
-.geo-rect {
-    top: 20%;
-    left: 40%;
-    width: 60px;
-    height: 30px;
-    background: var(--primary-200);
-    border-radius: 4px;
-}
-
-.geo-square {
-    bottom: 25%;
-    left: 15%;
-    width: 45px;
-    height: 45px;
-    border: 8px solid var(--accent-200);
-    transform: rotate(15deg);
-}
-
-.geo-circle {
-    top: 55%;
-    left: 5%;
-    width: 50px;
-    height: 50px;
-    border: 5px dashed var(--primary-300);
-    border-radius: 50%;
-}
-
-.geo-triangle {
-    top: -5%;
-    right: 30%;
-    width: 50px;
-    height: 50px;
-    background: var(--accent-100);
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    opacity: 0.4;
-}
-
+/* Optimized animation keyframes - use only transform for 60fps */
 @keyframes dynamicFloat {
 
     0%,
     100% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
     }
 
     25% {
-        transform: translate(30px, -40px) rotate(15deg) scale(1.1);
+        transform: translate3d(20px, -30px, 0) rotate(10deg) scale(1.05);
     }
 
     50% {
-        transform: translate(-40px, 20px) rotate(-10deg) scale(0.95);
+        transform: translate3d(-30px, 15px, 0) rotate(-8deg) scale(0.98);
     }
 
     75% {
-        transform: translate(20px, 50px) rotate(5deg) scale(1.05);
+        transform: translate3d(15px, 35px, 0) rotate(5deg) scale(1.02);
     }
 }
 
@@ -306,11 +211,11 @@
 
     0%,
     100% {
-        transform: translateY(0) rotate(0);
+        transform: translate3d(0, 0, 0) rotate(0);
     }
 
     50% {
-        transform: translateY(-30px) rotate(15deg);
+        transform: translate3d(0, -30px, 0) rotate(15deg);
     }
 }
 
@@ -332,6 +237,14 @@
 }
 
 .hero-right spline-viewer {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-2xl);
+    transform: scale(0.9);
+    transform-origin: center;
+}
+
+.hero-spline {
     width: 100%;
     height: 100%;
     border-radius: var(--radius-2xl);

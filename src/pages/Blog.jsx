@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
+import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../components/AnimatedSection';
 import { FiSearch, FiCalendar, FiUser, FiArrowRight } from 'react-icons/fi';
 import './Blog.css';
 
 export default function Blog() {
     const { data } = useData();
+    const { t } = useTranslation();
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -27,9 +29,9 @@ export default function Blog() {
             <section className="blog-hero">
                 <div className="container">
                     <AnimatedSection className="blog-hero-content">
-                        <span className="page-badge">Our Blog</span>
-                        <h1>Insights & Updates</h1>
-                        <p>Stay informed with the latest news, educational insights, and updates from our school community.</p>
+                        <span className="page-badge">{t('blog.badge')}</span>
+                        <h1>{t('blog.hero.title')}</h1>
+                        <p>{t('blog.hero.description')}</p>
                     </AnimatedSection>
                 </div>
             </section>
@@ -42,7 +44,7 @@ export default function Blog() {
                             <FiSearch />
                             <input
                                 type="text"
-                                placeholder="Search articles..."
+                                placeholder={t('blog.search')}
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
@@ -67,8 +69,8 @@ export default function Blog() {
                 <div className="container">
                     {filteredBlogs.length === 0 ? (
                         <div className="no-results">
-                            <h3>No articles found</h3>
-                            <p>Try adjusting your search or filter criteria.</p>
+                            <h3>{t('blog.noResults.title')}</h3>
+                            <p>{t('blog.noResults.description')}</p>
                         </div>
                     ) : (
                         <div className="blog-grid">
@@ -92,7 +94,7 @@ export default function Blog() {
                                             <h3 className="blog-card-title">{blog.title}</h3>
                                             <p className="blog-card-excerpt">{blog.excerpt}</p>
                                             <span className="blog-read-more">
-                                                Read More <FiArrowRight />
+                                                {t('common.readMore')} <FiArrowRight />
                                             </span>
                                         </div>
                                     </Link>

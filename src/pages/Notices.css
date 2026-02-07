@@ -32,7 +32,19 @@
     border-bottom: 1px solid var(--neutral-100);
     position: sticky;
     top: 80px;
-    z-index: var(--z-sticky);
+    z-index: 90; /* Lower than header (100) to prevent overlap */
+    /* Performance optimizations for smooth scrolling */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: box-shadow var(--transition-fast);
+}
+
+/* Adjust top position for mobile to account for smaller header */
+@media (max-width: 768px) {
+    .notices-filter {
+        top: 60px; /* Smaller header on mobile */
+    }
 }
 
 .filter-content {
@@ -82,6 +94,7 @@
 /* Notices List */
 .notices-list-section {
     background: var(--neutral-50);
+    overflow: visible; /* Prevent clipping of animated content */
 }
 
 .notices-list {
@@ -90,6 +103,7 @@
     gap: var(--space-6);
     max-width: 900px;
     margin: 0 auto;
+    overflow: visible; /* Ensure date boxes aren't clipped */
 }
 
 .notice-item {
@@ -100,12 +114,16 @@
     padding: var(--space-6);
     box-shadow: var(--shadow-sm);
     position: relative;
-    transition: all var(--transition-base);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
     border: 1px solid var(--neutral-100);
+    /* GPU acceleration for smooth hover */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    overflow: visible; /* Ensure date box isn't clipped */
 }
 
 .notice-item:hover {
-    transform: translateX(5px);
+    transform: translate3d(5px, 0, 0);
     box-shadow: var(--shadow-lg);
 }
 
@@ -129,34 +147,45 @@
 
 .notice-date-box {
     flex-shrink: 0;
-    width: 80px;
+    min-width: 110px; /* Increased significantly for full date visibility */
+    width: 110px;
+    min-height: 110px; /* Ensure enough vertical space */
     background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
     border-radius: var(--radius-lg);
-    padding: var(--space-4);
+    padding: var(--space-4); /* Balanced padding */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: var(--white);
     text-align: center;
+    overflow: visible; /* Ensure content isn't clipped */
+    box-sizing: border-box; /* Include padding in width/height */
 }
 
 .date-day {
-    font-size: var(--text-3xl);
+    font-size: 2.5rem; /* Reduced from var(--text-3xl) to fit better */
     font-weight: 800;
-    line-height: 1;
+    line-height: 1; /* Tight for numbers */
+    margin-bottom: 6px; /* More gap between day and month */
 }
 
 .date-month {
-    font-size: var(--text-sm);
+    font-size: 0.75rem; /* Slightly smaller to fit */
     font-weight: 600;
     text-transform: uppercase;
-    margin-top: var(--space-1);
+    margin-top: 0;
+    margin-bottom: 4px; /* Gap before year */
+    line-height: 1.2;
+    word-break: keep-all; /* Prevent word breaking */
+    white-space: nowrap; /* Keep month name on one line */
 }
 
 .date-year {
-    font-size: var(--text-xs);
-    opacity: 0.8;
+    font-size: 0.7rem; /* Slightly smaller */
+    opacity: 1; /* Fully visible */
+    margin-top: 0;
+    line-height: 1.2;
 }
 
 .notice-content {

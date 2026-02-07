@@ -1,4 +1,5 @@
 import { useData } from '../context/DataContext';
+import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../components/AnimatedSection';
 import { motion } from 'framer-motion';
 import { FiTarget, FiEye, FiAward, FiHeart, FiStar, FiUsers, FiBookOpen, FiGlobe } from 'react-icons/fi';
@@ -7,12 +8,13 @@ import './About.css';
 export default function About() {
     const { data } = useData();
     const { about } = data;
+    const { t } = useTranslation();
 
     const values = [
-        { icon: FiHeart, title: "Compassion", description: "We foster empathy and care for others in our community." },
-        { icon: FiStar, title: "Excellence", description: "We strive for the highest standards in everything we do." },
-        { icon: FiUsers, title: "Teamwork", description: "We believe in the power of collaboration and mutual support." },
-        { icon: FiAward, title: "Integrity", description: "We uphold honesty and ethical behavior at all times." }
+        { icon: FiHeart, title: t('about.values.compassion.title'), description: t('about.values.compassion.description') },
+        { icon: FiStar, title: t('about.values.excellence.title'), description: t('about.values.excellence.description') },
+        { icon: FiUsers, title: t('about.values.teamwork.title'), description: t('about.values.teamwork.description') },
+        { icon: FiAward, title: t('about.values.integrity.title'), description: t('about.values.integrity.description') }
     ];
 
     return (
@@ -22,9 +24,9 @@ export default function About() {
                 <div className="about-hero-bg"></div>
                 <div className="container">
                     <AnimatedSection className="about-hero-content">
-                        <span className="page-badge">About Us</span>
-                        <h1>Building Tomorrow's Leaders Today</h1>
-                        <p>Learn about our journey, mission, and the values that drive us to excel in education.</p>
+                        <span className="page-badge">{t('about.badge')}</span>
+                        <h1>{t('about.hero.title')}</h1>
+                        <p>{t('about.hero.description')}</p>
                     </AnimatedSection>
                 </div>
             </section>
@@ -56,18 +58,10 @@ export default function About() {
                 <div className="container">
                     <div className="history-content">
                         <AnimatedSection animation="fadeInLeft" className="history-text">
-                            <span className="section-badge">Our Story</span>
-                            <h2>A Legacy of Excellence Since 2010</h2>
-                            <p>
-                                Subhakamana School was founded with a vision to provide world-class education
-                                in Nepal. Starting with just 50 students and 5 teachers, we have grown into
-                                one of the most respected educational institutions in Kathmandu.
-                            </p>
-                            <p>
-                                Today, we serve over 1500 students with 85+ dedicated faculty members. Our
-                                alumni have gone on to achieve success in diverse fields, from medicine and
-                                engineering to arts and entrepreneurship.
-                            </p>
+                            <span className="section-badge">{t('about.story.badge')}</span>
+                            <h2>{t('about.story.title')}</h2>
+                            <p>{t('about.story.paragraph1')}</p>
+                            <p>{t('about.story.paragraph2')}</p>
                         </AnimatedSection>
                         <AnimatedSection animation="fadeInRight" className="history-image">
                             <img
@@ -76,7 +70,7 @@ export default function About() {
                             />
                             <div className="history-badge">
                                 <span className="number">15+</span>
-                                <span className="text">Years</span>
+                                <span className="text">{t('about.story.years')}</span>
                             </div>
                         </AnimatedSection>
                     </div>
@@ -91,11 +85,11 @@ export default function About() {
                             <img src={about.principal.image} alt={about.principal.name} />
                         </AnimatedSection>
                         <AnimatedSection animation="fadeInRight" className="principal-text">
-                            <span className="section-badge">Principal's Message</span>
+                            <span className="section-badge">{t('about.principal.badge')}</span>
                             <blockquote>"{about.principal.message}"</blockquote>
                             <div className="principal-info">
                                 <h4>{about.principal.name}</h4>
-                                <span>{about.principal.title || 'Principal'}</span>
+                                <span>{about.principal.title || t('about.principal.title')}</span>
                             </div>
                         </AnimatedSection>
                     </div>
@@ -106,9 +100,9 @@ export default function About() {
             <section className="section values-section">
                 <div className="container">
                     <AnimatedSection className="section-header text-center">
-                        <span className="section-badge">Our Principles</span>
-                        <h2>Core Values</h2>
-                        <p>The principles that guide everything we do</p>
+                        <span className="section-badge">{t('about.values.badge')}</span>
+                        <h2>{t('about.values.title')}</h2>
+                        <p>{t('about.values.description')}</p>
                     </AnimatedSection>
 
                     <div className="values-grid">
@@ -134,9 +128,9 @@ export default function About() {
             <section className="section team-section">
                 <div className="container">
                     <AnimatedSection className="section-header text-center">
-                        <span className="section-badge">Our Team</span>
-                        <h2>Meet Our Leadership</h2>
-                        <p>Dedicated professionals committed to excellence</p>
+                        <span className="section-badge">{t('about.team.badge')}</span>
+                        <h2>{t('about.team.title')}</h2>
+                        <p>{t('about.team.description')}</p>
                     </AnimatedSection>
 
                     <div className="team-grid">
@@ -164,9 +158,9 @@ export default function About() {
             <section className="about-cta">
                 <div className="container">
                     <AnimatedSection className="about-cta-content text-center">
-                        <h2>Experience Our Campus</h2>
-                        <p>Schedule a visit to see our facilities and meet our team.</p>
-                        <a href="/contact" className="btn btn-light btn-lg">Contact Us</a>
+                        <h2>{t('about.cta.title')}</h2>
+                        <p>{t('about.cta.description')}</p>
+                        <a href="/contact" className="btn btn-light btn-lg">{t('common.contactUs')}</a>
                     </AnimatedSection>
                 </div>
             </section>

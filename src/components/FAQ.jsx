@@ -1,46 +1,48 @@
 import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import AnimatedSection from './AnimatedSection';
 import './FAQ.css';
 
-const faqData = [
-    {
-        question: "What grades does Merryland School offer?",
-        answer: "Merryland School offers education from Nursery to Grade 10, providing a comprehensive learning environment for students aged 3 to 16 years."
-    },
-    {
-        question: "What is the admission process?",
-        answer: "The admission process involves filling out an online application form, submitting required documents, attending an interview, and completing an entrance assessment. Click the 'Apply Now' button to start your application."
-    },
-    {
-        question: "What are the school hours?",
-        answer: "Our school operates from 8:00 AM to 3:30 PM from Sunday to Friday. We also offer extended day programs for working parents."
-    },
-    {
-        question: "What curriculum does the school follow?",
-        answer: "Merryland School follows the national curriculum prescribed by the Government of Nepal, integrated with modern teaching methodologies and international best practices."
-    },
-    {
-        question: "Do you provide transportation services?",
-        answer: "Yes, we provide safe and reliable bus transportation covering major areas of Kathmandu Valley. Our buses are equipped with GPS tracking and trained staff."
-    },
-    {
-        question: "What extracurricular activities are available?",
-        answer: "We offer a wide range of activities including sports (football, basketball, cricket), arts (music, dance, painting), technology clubs, debate teams, and community service programs."
-    },
-    {
-        question: "What are the class sizes?",
-        answer: "We maintain a student-teacher ratio of 1:20 to ensure personalized attention and effective learning for every student."
-    },
-    {
-        question: "Are there scholarships available?",
-        answer: "Yes, we offer merit-based and need-based scholarships to deserving students. Please contact our admissions office for detailed information on scholarship opportunities."
-    }
-];
-
 export default function FAQ() {
     const [openIndex, setOpenIndex] = useState(null);
+    const { t } = useTranslation();
+
+    const faqData = [
+        {
+            question: t('faq.questions.q1.question'),
+            answer: t('faq.questions.q1.answer')
+        },
+        {
+            question: t('faq.questions.q2.question'),
+            answer: t('faq.questions.q2.answer')
+        },
+        {
+            question: t('faq.questions.q3.question'),
+            answer: t('faq.questions.q3.answer')
+        },
+        {
+            question: t('faq.questions.q4.question'),
+            answer: t('faq.questions.q4.answer')
+        },
+        {
+            question: t('faq.questions.q5.question'),
+            answer: t('faq.questions.q5.answer')
+        },
+        {
+            question: t('faq.questions.q6.question'),
+            answer: t('faq.questions.q6.answer')
+        },
+        {
+            question: t('faq.questions.q7.question'),
+            answer: t('faq.questions.q7.answer')
+        },
+        {
+            question: t('faq.questions.q8.question'),
+            answer: t('faq.questions.q8.answer')
+        }
+    ];
 
     const toggleFAQ = (index) => {
         setOpenIndex(openIndex === index ? null : index);
@@ -50,9 +52,9 @@ export default function FAQ() {
         <section className="faq-section">
             <div className="container">
                 <AnimatedSection className="section-header text-center">
-                    <span className="section-badge">FAQ</span>
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Find answers to common questions about Merryland School</p>
+                    <span className="section-badge">{t('faq.badge')}</span>
+                    <h2>{t('faq.title')}</h2>
+                    <p>{t('faq.description')}</p>
                 </AnimatedSection>
 
                 <div className="faq-container">
@@ -95,9 +97,9 @@ export default function FAQ() {
                 </div>
 
                 <div className="faq-cta">
-                    <p>Still have questions?</p>
+                    <p>{t('faq.stillHaveQuestions')}</p>
                     <a href="/contact" className="btn btn-primary">
-                        Contact Us
+                        {t('faq.contactUs')}
                     </a>
                 </div>
             </div>

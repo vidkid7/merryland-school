@@ -4,6 +4,7 @@ import AnimatedSection from '../components/AnimatedSection';
 import NoticePopup from '../components/NoticePopup';
 import VideoShowcase from '../components/VideoShowcase';
 import FAQ from '../components/FAQ';
+import SplineLazyLoader from '../components/SplineLazyLoader';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
@@ -44,27 +45,14 @@ export default function Home() {
                             <div className="hero-text-bg-decoration"></div>
                             <div className="hero-text-blob"></div>
                             <div className="hero-text-blob-2"></div>
-                            <div className="hero-text-blob-3"></div>
-                            <div className="hero-text-blob-4"></div>
 
-                            {/* Floating Math/Education Equipment - More Crowded */}
+                            {/* Floating Math/Education Equipment - Optimized to 4 elements */}
                             <div className="hero-equipment eq-1"><Icons.FiBook /></div>
                             <div className="hero-equipment eq-2"><Icons.FiEdit3 /></div>
                             <div className="hero-equipment eq-3"><Icons.FiCompass /></div>
-                            <div className="hero-equipment eq-4"><Icons.FiActivity /></div>
-                            <div className="hero-equipment eq-5"><Icons.FiLayers /></div>
                             <div className="hero-equipment eq-6" style={{ fontWeight: 'bold' }}>π</div>
-                            <div className="hero-equipment eq-7"><Icons.FiPaperclip /></div>
-                            <div className="hero-equipment eq-8"><Icons.FiGlobe /></div>
-                            <div className="hero-equipment eq-9"><Icons.FiPenTool /></div>
-                            <div className="hero-equipment eq-10"><Icons.FiAward /></div>
 
-                            {/* Geometric Shapes */}
-                            <div className="hero-geo geo-rect"></div>
-                            <div className="hero-geo geo-square"></div>
-                            <div className="hero-geo geo-circle"></div>
-                            <div className="hero-geo geo-triangle"></div>
-
+                            {/* Floating Shapes - Optimized to 3 elements */}
                             <div className="hero-floating-shape shape-1"></div>
                             <div className="hero-floating-shape shape-2"></div>
                             <div className="hero-floating-shape shape-3"></div>
@@ -132,7 +120,11 @@ export default function Home() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.3 }}
                     >
-                        <spline-viewer url="https://prod.spline.design/k0v196fCnQarCKhe/scene.splinecode"></spline-viewer>
+                        <SplineLazyLoader
+                            url="https://prod.spline.design/k0v196fCnQarCKhe/scene.splinecode"
+                            fallbackImage="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop"
+                            className="hero-spline"
+                        />
                     </motion.div>
                 </div>
 

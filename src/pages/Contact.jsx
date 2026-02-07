@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useData } from '../context/DataContext';
+import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../components/AnimatedSection';
 import {
     FiPhone,
@@ -13,6 +14,7 @@ import './Contact.css';
 
 export default function Contact() {
     const { data, addContactMessage } = useData();
+    const { t } = useTranslation();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -42,9 +44,9 @@ export default function Contact() {
             <section className="contact-hero">
                 <div className="container">
                     <AnimatedSection className="contact-hero-content">
-                        <span className="page-badge">Contact Us</span>
-                        <h1>Get in Touch</h1>
-                        <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                        <span className="page-badge">{t('contact.badge')}</span>
+                        <h1>{t('contact.hero.title')}</h1>
+                        <p>{t('contact.hero.description')}</p>
                     </AnimatedSection>
                 </div>
             </section>
@@ -55,8 +57,8 @@ export default function Contact() {
                     <div className="contact-grid">
                         {/* Contact Info */}
                         <AnimatedSection animation="fadeInLeft" className="contact-info">
-                            <h3>Contact Information</h3>
-                            <p>Feel free to reach out to us through any of the following channels:</p>
+                            <h3>{t('contact.info.title')}</h3>
+                            <p>{t('contact.info.description')}</p>
 
                             <div className="contact-cards">
                                 <div className="contact-card">
@@ -64,7 +66,7 @@ export default function Contact() {
                                         <FiMapPin />
                                     </div>
                                     <div>
-                                        <h4>Address</h4>
+                                        <h4>{t('contact.info.address')}</h4>
                                         <p>{data.settings.address}</p>
                                     </div>
                                 </div>
@@ -74,7 +76,7 @@ export default function Contact() {
                                         <FiPhone />
                                     </div>
                                     <div>
-                                        <h4>Phone</h4>
+                                        <h4>{t('contact.info.phone')}</h4>
                                         <a href={`tel:${data.settings.phone}`}>{data.settings.phone}</a>
                                     </div>
                                 </div>
@@ -84,7 +86,7 @@ export default function Contact() {
                                         <FiMail />
                                     </div>
                                     <div>
-                                        <h4>Email</h4>
+                                        <h4>{t('contact.info.email')}</h4>
                                         <a href={`mailto:${data.settings.email}`}>{data.settings.email}</a>
                                     </div>
                                 </div>
@@ -94,9 +96,9 @@ export default function Contact() {
                                         <FiClock />
                                     </div>
                                     <div>
-                                        <h4>Office Hours</h4>
-                                        <p>Sunday - Friday: 8:00 AM - 4:00 PM</p>
-                                        <p>Saturday: Closed</p>
+                                        <h4>{t('contact.info.hours')}</h4>
+                                        <p>{t('contact.info.hoursDetail')}</p>
+                                        <p>{t('contact.info.saturday')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -104,21 +106,21 @@ export default function Contact() {
 
                         {/* Contact Form */}
                         <AnimatedSection animation="fadeInRight" className="contact-form-container">
-                            <h3>Send us a Message</h3>
+                            <h3>{t('contact.form.title')}</h3>
 
                             {submitted ? (
                                 <div className="success-message">
                                     <div className="success-icon">
                                         <FiCheck />
                                     </div>
-                                    <h4>Thank You!</h4>
-                                    <p>Your message has been sent successfully. We'll get back to you soon.</p>
+                                    <h4>{t('contact.success.title')}</h4>
+                                    <p>{t('contact.success.message')}</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="contact-form">
                                     <div className="form-row">
                                         <div className="form-group">
-                                            <label htmlFor="name" className="form-label">Full Name *</label>
+                                            <label htmlFor="name" className="form-label">{t('contact.form.name')} {t('contact.form.required')}</label>
                                             <input
                                                 type="text"
                                                 id="name"
@@ -127,11 +129,11 @@ export default function Contact() {
                                                 value={formData.name}
                                                 onChange={handleChange}
                                                 required
-                                                placeholder="Your full name"
+                                                placeholder={t('contact.form.namePlaceholder')}
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="email" className="form-label">Email Address *</label>
+                                            <label htmlFor="email" className="form-label">{t('contact.form.email')} {t('contact.form.required')}</label>
                                             <input
                                                 type="email"
                                                 id="email"
@@ -140,14 +142,14 @@ export default function Contact() {
                                                 value={formData.email}
                                                 onChange={handleChange}
                                                 required
-                                                placeholder="your@email.com"
+                                                placeholder={t('contact.form.emailPlaceholder')}
                                             />
                                         </div>
                                     </div>
 
                                     <div className="form-row">
                                         <div className="form-group">
-                                            <label htmlFor="phone" className="form-label">Phone Number</label>
+                                            <label htmlFor="phone" className="form-label">{t('contact.form.phone')}</label>
                                             <input
                                                 type="tel"
                                                 id="phone"
@@ -155,11 +157,11 @@ export default function Contact() {
                                                 className="form-input"
                                                 value={formData.phone}
                                                 onChange={handleChange}
-                                                placeholder="+977-XXXXXXXXXX"
+                                                placeholder={t('contact.form.phonePlaceholder')}
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="subject" className="form-label">Subject *</label>
+                                            <label htmlFor="subject" className="form-label">{t('contact.form.subject')} {t('contact.form.required')}</label>
                                             <input
                                                 type="text"
                                                 id="subject"
@@ -168,13 +170,13 @@ export default function Contact() {
                                                 value={formData.subject}
                                                 onChange={handleChange}
                                                 required
-                                                placeholder="How can we help?"
+                                                placeholder={t('contact.form.subjectPlaceholder')}
                                             />
                                         </div>
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="message" className="form-label">Message *</label>
+                                        <label htmlFor="message" className="form-label">{t('contact.form.message')} {t('contact.form.required')}</label>
                                         <textarea
                                             id="message"
                                             name="message"
@@ -182,13 +184,13 @@ export default function Contact() {
                                             value={formData.message}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Write your message here..."
+                                            placeholder={t('contact.form.messagePlaceholder')}
                                             rows={5}
                                         />
                                     </div>
 
                                     <button type="submit" className="btn btn-primary btn-lg">
-                                        <FiSend /> Send Message
+                                        <FiSend /> {t('contact.form.submit')}
                                     </button>
                                 </form>
                             )}
